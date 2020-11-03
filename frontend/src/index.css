@@ -11,3 +11,9 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+div.root{
+  padding-bottom: 50%;
+  background: rgb(34,195,184);
+  background: linear-gradient(0deg, rgba(34,195,184,1) 0%, rgba(45,124,253,1) 100%);
+}
