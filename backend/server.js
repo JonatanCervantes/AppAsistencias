@@ -1,3 +1,5 @@
+require('./config/config');
+
 const express = require('express');
 const cors = require('cors');
 const mongoose = require('mongoose');
@@ -19,6 +21,12 @@ connection.once('open', ()=>{
 
 const usuariosRouter = require('./rutas/usuarios');
 app.use('/usuarios', usuariosRouter);
+
+const loginRouter = require('./rutas/login');
+app.use('/login', loginRouter);
+
+const registerRouter = require('./rutas/register');
+app.use('/register', registerRouter);
 
 app.listen(port, ()=>{
     console.log('Servidor corriendo en el puerto:' + port);
