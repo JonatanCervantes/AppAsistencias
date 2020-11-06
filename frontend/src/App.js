@@ -12,6 +12,7 @@ import Login from './components/auth/login.component';
 
 
 function App() {
+  
   return (
     <Router>
       <Navbar/>
