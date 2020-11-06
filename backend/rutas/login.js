@@ -33,9 +33,9 @@ router.route('/').post(function (req, res) {
          });
       }
       // Genera el token de autenticación
-      const token = jwt.sign({_id: usuarioDB._id}, process.env.SEED_AUTENTICACION, 
+      const token = jwt.sign({_id: usuarioDB._id}, process.env.TOKEN_SECRET, 
          {expiresIn: process.env.CADUCIDAD_TOKEN})     
-      res.header('Authorization', `Bearer ${token}`).send();
+      res.header('Authorization', `${token}`).send();
    })
 
 });

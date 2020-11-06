@@ -12,4 +12,4 @@ process.env.URLDB = urlDB;
 
 process.env.CADUCIDAD_TOKEN = '1h';
 
-process.env.SEED_AUTENTICACION = process.env.SEED_AUTENTICACION ||  'este-es-el-seed-desarrollo';
+process.env.TOKEN_SECRET = process.env.TOKEN_SECRET ||  'SECRETON';
