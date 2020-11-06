@@ -24,7 +24,7 @@ export default function Registro() {
         axios.post('http://localhost:5000/register', usuario)
             .then(res => {
                 console.log(res);
-                history.push("/perfil");
+                history.push("/login");
             })
             .catch(e => {
                 console.log(e);

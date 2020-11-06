@@ -1,11 +1,17 @@
-import React, {Component} from 'react';
+import React, {useState} from 'react';
 
-export default class Perfil extends Component {
-    render() {
-        return (
-            <div>
-                <p>Estas en el componente para el perfil</p>
-            </div>
-        );
-    }
+export default function Perfil() {
+    const [token, setToken] = useState(localStorage.getItem("token"));
+
+    const establecerToken = ()=>{
+        setToken(localStorage.getItem("token"));
+    }    
+    return (
+        <div>
+            <p>Estas en el componente para el perfil</p>
+            <p>Token: {token}</p>
+            
+        </div>
+    );
+    
 }

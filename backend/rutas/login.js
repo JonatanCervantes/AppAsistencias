@@ -33,17 +33,9 @@ router.route('/').post(function (req, res) {
          });
       }
       // Genera el token de autenticación
-      let token = jwt.sign({
-         usuario: usuarioDB,
-      }, process.env.SEED_AUTENTICACION, {
-         expiresIn: process.env.CADUCIDAD_TOKEN
-      })
-      
-      res.json({
-         ok: true,
-         usuario: usuarioDB,
-         token,
-      })
+      const token = jwt.sign({_id: usuarioDB._id}, process.env.SEED_AUTENTICACION, 
+         {expiresIn: process.env.CADUCIDAD_TOKEN})     
+      res.header('Authorization', `Bearer ${token}`).send();
    })
 
 });

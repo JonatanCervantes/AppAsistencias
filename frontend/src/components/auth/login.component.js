@@ -21,8 +21,8 @@ export default function Login() {
 
     axios.post('http://localhost:5000/login', usuario)
       .then(res => {
-        console.log(res);
-        history.push("perfil")
+        localStorage.setItem("token", res.headers['authorization']);        
+        history.push("/perfil")
       })
       .catch(e => {        
         console.log(e);
