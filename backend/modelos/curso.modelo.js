@@ -3,10 +3,8 @@ const Schema = mongoose.Schema;
 
 const cursoSchema = new Schema({
 
-    Psemestre:{ 
+    semestre:{ 
         type:String, 
-        required:true, 
-        unique:true, 
         trim:true, 
         minlength:6,
         required: [true, 'El periodo del semestre es necesario'],
@@ -14,8 +12,6 @@ const cursoSchema = new Schema({
 },
     nombre:{ 
         type:String, 
-        required:true, 
-        unique:true, 
         trim:true, 
         minlength:4,
         required: [true, 'El nombre del curso es necesario'],
@@ -23,7 +19,6 @@ const cursoSchema = new Schema({
 
     clave:{ 
         type:String, 
-        required:true, 
         trim:true, 
         minlength:4,
         required: [true, 'La clave del curso es necesaria'],
@@ -32,14 +27,13 @@ const cursoSchema = new Schema({
 
     unidades:{ 
         type:Number, 
-        required:true, 
         max:9,
         required:[true, 'El Numero de unidades es necesario'],
     },
     
-    grupo: {
-       type: mongoose.Schema.ObjectId, ref:'grupo'
-    },
+    grupo: [{
+       type: mongoose.Schema.ObjectId, ref:'Grupo'
+    }],
 },{
     timestamps:true
 });

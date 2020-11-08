@@ -1,11 +1,9 @@
 const mongoose = require('mongoose');
-const { schema } = require('./curso.modelo');
 const Schema = mongoose.Schema;
-const cursoSchema = mongoose.model("Curso");
 
 const grupoSchema = new Schema({
 
-    grupos: { 
+    nombre: { 
         type:String, 
         required:true, 
         unique:true, 
@@ -20,12 +18,9 @@ const grupoSchema = new Schema({
         minlength:4,
         
     },
-    //Curso: {
-      //  type: Schema.Types.ObjectId, ref: "Curso", required: true
-    //},
 }, {
     timestamps:true
 });
 
-const Grupo = mongoose.model('Grupo', cursoSchema);
+const Grupo = mongoose.model('Grupo', grupoSchema);
 module.exports = Grupo
