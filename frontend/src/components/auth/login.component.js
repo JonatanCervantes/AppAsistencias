@@ -1,13 +1,15 @@
-import React, { useState } from "react";
+import React, { useState , useContext} from "react";
 import { useHistory } from 'react-router-dom';
 import axios from 'axios';
 import './style.css';
 import {useForm} from 'react-hook-form';
+import {UsuarioContext} from "./UsuarioContext";
 
 export default function Login() {
   const {register, handleSubmit, errors} = useForm(); 
   const [mensajeError, setMensajeError] = useState("");
   const history = useHistory();
+  const [usuario, setUsuario, establecerToken] = useContext(UsuarioContext);
 
   const mostrarMensajeError = ()=>{
     setMensajeError("Usuario o contrasenia invalidos");
@@ -21,7 +23,12 @@ export default function Login() {
 
     axios.post('http://localhost:5000/login', usuario)
       .then(res => {
-        localStorage.setItem("token", res.headers['authorization']);   
+        const token = res.headers['authorization'];
+        const guardar = async() => {
+          await localStorage.setItem("token", token);
+        }
+        guardar();  
+        establecerToken(token);
         history.push("/perfil");
       })
       .catch(e => {        

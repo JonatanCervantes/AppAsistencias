@@ -2,7 +2,7 @@ import React from 'react';
 import {BrowserRouter as Router, Route} from 'react-router-dom';
 import "bootstrap/dist/css/bootstrap.min.css";
 
-//import {UsuarioProvider} from "./components/auth/UsuarioContext";
+import {UsuarioProvider} from "./components/auth/UsuarioContext";
 
 import Navbar from "./components/navbar.component";
 import Perfil from "./components/perfil.component";
@@ -22,12 +22,13 @@ function App() {
       <br/>
       
       <PrivateRoute path="/" exact component={Index}/>
+      <UsuarioProvider>
       <Route path="/registro" exact component={Registro}/>
-      <Route path="/login" exact component={Login}/>
+      <Route path="/login" exact component={Login}/>      
       <PrivateRoute path="/perfil" exact component={Perfil}/>
       <PrivateRoute path="/cursos" exact component={Cursos}/>
       <PrivateRoute path="/asistencias" exact component={Asistencias}/>
-      
+      </UsuarioProvider>
     </Router>
   );
 }

@@ -3,12 +3,6 @@ let Usuario = require('../modelos/usuario.modelo');
 const jwt = require ('jsonwebtoken');
 const {obtenerId} = require('./verifyToken');
 
-// router.route('/').get((req, res)=>{
-//     Usuario.find()
-//         .then(usuarios => res.json(usuarios))
-//         .catch(err => res.status(400).json('Error: ' + err));
-// });
-
 router.route('/').get((req, res)=>{
     const idUsuario = obtenerId(req);
 

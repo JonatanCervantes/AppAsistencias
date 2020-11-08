@@ -1,18 +1,43 @@
-// import React,{useState, createContext} from 'react';
+import React,{useState, createContext, useEffect} from 'react';
+import axios from 'axios';
 
-// export const UsuarioContext = createContext();
+export const UsuarioContext = createContext();
 
-// export const UsuarioProvider = (props) => {
-//     const [usuario, setUsuario] = useState({});
+export const UsuarioProvider = (props) => {
+    const [usuario, setUsuario] = useState({});
+    const [token, setToken] = useState("");
 
-//     const establecerUsuario = ()=>{
-//         setUsuario();
-//     } 
+    if(token=="") {
+        establecerToken(localStorage.getItem('token'));
+    } 
 
-//     return (
-//         <UsuarioContext.Provider value ={"hello"}>
-//             {props.children}
-//         </UsuarioContext.Provider>
-//     );
+    const obtenerUsuario = ()=> {
+        if(token != null && token != "") {
+            axios.get('http://localhost:5000/usuarios/', {headers:{authorization:token}})
+            .then(res => { 
+                console.log(res);
+                establecerUsuario(res.data)
+            })
+            .catch(e => {        
+                console.log(e);
+            })  
+        }        
+    }
+
+    function establecerToken(token) {
+        setToken(token);
+    }    
+
+    function establecerUsuario(usuario) {
+        setUsuario(usuario);
+    }
+
+    useEffect(obtenerUsuario, [token]);  
+
+    return (
+        <UsuarioContext.Provider value ={[usuario, setUsuario, establecerToken]}>
+            {props.children}
+        </UsuarioContext.Provider>
+    );
     
-// }
+}

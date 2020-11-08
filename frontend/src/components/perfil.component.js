@@ -1,25 +1,8 @@
-import React, {useState, useEffect} from 'react';
-import axios from 'axios';
+import React, {useContext} from 'react';
+import {UsuarioContext} from "./auth/UsuarioContext";
 
 export default function Perfil() {    
-    const [usuario, setUsuario] = useState({});    
-
-    function establecerUsuario(usuario) {
-        setUsuario(usuario);
-    }
-
-    const obtenerUsuario = ()=> {
-        axios.get('http://localhost:5000/usuarios/', {headers:{authorization:localStorage.getItem('token')}})
-        .then(res => {
-          console.log(res);
-          establecerUsuario(res.data)
-        })
-        .catch(e => {        
-              console.log(e);
-        })
-    }
-    
-    useEffect(obtenerUsuario,[]);    
+    const [usuario, setUsuario] = useContext(UsuarioContext);   
 
     return (
         <div>
