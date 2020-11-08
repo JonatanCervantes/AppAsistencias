@@ -43,34 +43,36 @@ export default function Registro() {
                     <div className="form-group d-flex flex-column justify-content-center">
                         <input 
                             type="text" 
-                            placeholder="Domitsu Kono" 
+                            placeholder="Nombre" 
                             className="form-control box" 
                             name="name"
-                            ref={register({required:"Nombre requerido",  pattern:{value: /^[a-zA-Z]+$/, message:"Solo letras"}, minLength:{value:4, message:"Min 4 caracteres"}, maxLength:{value:10, message:"Max 10 caracteres"}})}
+                            ref={register({required:"*Nombre requerido",  pattern:{value: /^[a-zA-Z]+$/, message:"Solo letras"}, minLength:{value:4, message:"Min 4 caracteres"}, maxLength:{value:10, message:"Max 10 caracteres"}})}
                         ></input>
-                        {errors.name && <p>{errors.name.message}</p>}
+                        {errors.name && <p className="error">{errors.name.message}</p>}
                         <input 
                             type="text" 
                             placeholder="maestro@itson.edu.mx" 
                             className="form-control box" 
                             name="email"
-                            ref={register({required:"Correo requerido", pattern: {value: /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/, message:"Correo invalido"}})}    
+                            ref={register({required:"*Correo requerido", pattern: {value: /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/, message:"Correo invalido"}})}    
                         ></input>
-                        {errors.email && <p>{errors.email.message}</p>}
+                        {errors.email && <p className="error">{errors.email.message}</p>}
                         <input 
                             type="password" 
                             placeholder="Contraseña" 
                             className="form-control box" 
                             name="password"
-                            ref={register({required:"Contrasenia requerida", minLength:{value:4, message:"Min 4 caracteres"}, maxLength:{value:10, message:"Max 10 caracteres"}})}
+                            ref={register({required:"*Contraseña requerida", minLength:{value:6, message:"Mínimo 6 caracteres"}, maxLength:{value:12, message:"Máximo 12 caracteres"}})}
                         ></input>
-                        {errors.password && <p>{errors.password.message}</p>}
+                        {errors.password && <p className="error">{errors.password.message}</p>}
                     </div>
                     <div className="form-group">
                         <input type="submit" value="Registrarse" className="btn btn-primary"></input>
                     </div>
                 </form>
-                <p>{mensajeError}</p>
+                <p className="error">{mensajeError}</p>
+
+                <a href="/login">¿Ya tiene una cuenta? Iniciar sesión</a>
             </div>
         </div>
     );

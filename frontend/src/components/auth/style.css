@@ -9,7 +9,7 @@
         text-align: center;
 
         width: 35%;
-        border: 1px solid black;
+        border: 3px solid black;
         border-radius: 15%;
         padding: 2% 2% 2% 2%; 
         background-color: white;
@@ -23,4 +23,8 @@
         align-self: center;
         width: 80%;
         margin: 0 0 5px 0;
+    }
+
+    p.error {
+        color: red;
     }

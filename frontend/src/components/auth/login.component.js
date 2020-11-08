@@ -21,8 +21,8 @@ export default function Login() {
 
     axios.post('http://localhost:5000/login', usuario)
       .then(res => {
-        localStorage.setItem("token", res.headers['authorization']);        
-        history.push("/perfil")
+        localStorage.setItem("token", res.headers['authorization']);   
+        history.push("/perfil");
       })
       .catch(e => {        
         console.log(e);
@@ -43,23 +43,24 @@ export default function Login() {
               placeholder="maestro@itson.edu.mx" 
               className="form-control box" 
               name="email"
-              ref={register({required:"Correo requerido", pattern: {value: /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/, message:"Correo invalido"}})}  
+              ref={register({required:"*Correo requerido", pattern: {value: /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/, message:"Correo invalido"}})}  
             ></input>
-            {errors.email && <p>{errors.email.message}</p>}
+            {errors.email && <p className="error">{errors.email.message}</p>}
             <input type="password" 
               placeholder="Contraseña" 
               className="form-control box" 
               name="password"
-              ref={register({required:"Contrasenia requerida", minLength:{value:4, message:"Min 4 caracteres"}, maxLength:{value:10, message:"Max 14 caracteres"}})}
+              ref={register({required:"*Contraseña requerida", minLength:{value:6, message:"Mínimo 6 caracteres"}, maxLength:{value:12, message:"Máximo 12 caracteres"}})}
             ></input>
-            {errors.password && <p>{errors.password.message}</p>}
+            {errors.password && <p className="error">{errors.password.message}</p>}
           </div>
           <div className="form-group">
             <input type="submit" value="Ingresar" className="btn btn-primary"></input>
           </div>
         </form>
-        <p>{mensajeError}</p>
+        <p className="error">{mensajeError}</p>
 
+        <a href="/registro">¿No tiene una cuenta? Regístrese aquí</a>
       </div>
     </div>
   );

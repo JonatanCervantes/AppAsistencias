@@ -11,6 +11,7 @@ import Asistencias from "./components/asistencias.component";
 import Index from './components/index.component';
 import Registro from './components/auth/registro.component';
 import Login from './components/auth/login.component';
+import PrivateRoute from './components/auth/privateRoute';
 
 
 function App() {
@@ -20,12 +21,12 @@ function App() {
       <Navbar/>
       <br/>
       
-      <Route path="/" exact component={Index}/>
+      <PrivateRoute path="/" exact component={Index}/>
       <Route path="/registro" exact component={Registro}/>
       <Route path="/login" exact component={Login}/>
-      <Route path="/perfil" exact component={Perfil}/>
-      <Route path="/cursos" exact component={Cursos}/>
-      <Route path="/asistencias" exact component={Asistencias}/>
+      <PrivateRoute path="/perfil" exact component={Perfil}/>
+      <PrivateRoute path="/cursos" exact component={Cursos}/>
+      <PrivateRoute path="/asistencias" exact component={Asistencias}/>
       
     </Router>
   );
