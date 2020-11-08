@@ -38,7 +38,7 @@ const cursoSchema = new Schema({
     },
     
     grupo: {
-       type: mongoose.Schema.ObjectId, ref: 'Grupos', require: true
+       type: mongoose.Schema.ObjectId, ref:'grupo'
     },
 },{
     timestamps:true

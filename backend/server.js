@@ -31,6 +31,9 @@ app.use('/login', loginRouter);
 const registerRouter = require('./rutas/register');
 app.use('/register', registerRouter);
 
+const cursosRouter = require('./rutas/cursos');
+app.use('/cursos', cursosRouter);
+
 app.listen(port, ()=>{
     console.log('Servidor corriendo en el puerto:' + port);
 });
