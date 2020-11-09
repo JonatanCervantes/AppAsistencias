@@ -1,7 +1,7 @@
 import React, { useState , useContext} from "react";
 import { useHistory } from 'react-router-dom';
 import axios from 'axios';
-import './style.css';
+import '../style/style.css';
 import {useForm} from 'react-hook-form';
 import {UsuarioContext} from "./UsuarioContext";
 
@@ -12,7 +12,7 @@ export default function Login() {
   const [usuario, setUsuario, establecerToken] = useContext(UsuarioContext);
 
   const mostrarMensajeError = ()=>{
-    setMensajeError("Usuario o contrasenia invalidos");
+    setMensajeError("Usuario o contraseña inválidos");
   }
 
   const onSubmit = (data) => {    
@@ -39,7 +39,7 @@ export default function Login() {
 
   return (
     <div className="wrap">
-      <div className="formulario">
+      <div className="container formulario">
         <h1>PasaLista</h1>
         <h3>¡Extensión para el manejo de asistencias por medio de plataformas
                       educativas virtuales como Google Meet!</h3>        

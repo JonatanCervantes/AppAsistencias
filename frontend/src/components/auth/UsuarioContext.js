@@ -15,7 +15,6 @@ export const UsuarioProvider = (props) => {
         if(token != null && token != "") {
             axios.get('http://localhost:5000/usuarios/', {headers:{authorization:token}})
             .then(res => { 
-                console.log(res);
                 establecerUsuario(res.data)
             })
             .catch(e => {        

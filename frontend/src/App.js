@@ -22,9 +22,13 @@ function App() {
       <Navbar/>
       <br/>
       
-      <PrivateRoute path="/" exact component={Index}/>
       <UsuarioProvider>
+<<<<<<< HEAD
       <Route path="/registro" exact component={Registro} />
+=======
+      <Route path="/" exact component={Index}/>
+      <Route path="/registro" exact component={Registro}/>
+>>>>>>> dd11bd276af710f7ce75d91cf8a4612e8db7fbd4
       <Route path="/login" exact component={Login}/>      
       <PrivateRoute path="/perfil" exact component={Perfil}/>
       <PrivateRoute path="/cursos" exact component={MenuCursos}/>

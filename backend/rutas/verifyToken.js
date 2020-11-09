@@ -18,10 +18,8 @@ exports.verify = (req, res, next) => {
 exports.obtenerId = (req) => {
 //    try {        
         const token = req.headers.authorization;
-        console.log("Token: " + token);
         const decoded = jwt.verify(token, process.env.TOKEN_SECRET);  
         const userId = decoded._id;  
-        console.log("Token: " + token);
         return userId;
     // } catch (err) {
     //     console.log(err);
