@@ -29,6 +29,9 @@ const usuarioSchema  = new Schema({
         required: [true],
         enum: rolesValidos,
     },
+    cursos: [{
+        type: mongoose.Schema.Types.ObjectId, ref:'Curso'
+    }],
 }, {
     timestamps:true
 });
@@ -44,4 +47,5 @@ usuarioSchema.methods.toJSON = function() {
 usuarioSchema.plugin(uniqueValidator, {
     message: '{PATH} debe de ser único'
 })
-module.exports = mongoose.model('Usuario', usuarioSchema)
+const Usuario = mongoose.model('Usuario', usuarioSchema)
+module.exports = Usuario

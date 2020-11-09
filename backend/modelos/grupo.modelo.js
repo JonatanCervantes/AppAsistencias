@@ -5,7 +5,6 @@ const grupoSchema = new Schema({
 
     nombre: { 
         type:String, 
-        required:true, 
         unique:true, 
         trim:true, 
         minlength:4,
