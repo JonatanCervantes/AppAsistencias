@@ -1,17 +1,18 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
+
 const cursoSchema = new Schema({
 
     semestre:{ 
-        type:String, 
+        type:String,   
         trim:true, 
-        minlength:6,
+        minlength:1,
         required: [true, 'El periodo del semestre es necesario'],
 
 },
     nombre:{ 
-        type:String, 
+        type:String,   
         trim:true, 
         minlength:4,
         required: [true, 'El nombre del curso es necesario'],
@@ -31,9 +32,11 @@ const cursoSchema = new Schema({
         required:[true, 'El Numero de unidades es necesario'],
     },
     
-    grupo: [{
-       type: mongoose.Schema.ObjectId, ref:'Grupo'
-    }],
+    //grupo: [{
+       // text: String,
+        //type: mongoose.Schema.Types.ObjectId,
+        //ref: 'Grupo'
+   // }]
 },{
     timestamps:true
 });
