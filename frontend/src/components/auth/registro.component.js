@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import {useHistory} from 'react-router-dom';
 import axios from 'axios';
-import './style.css';
+import '../style/style.css';
 import {useForm} from 'react-hook-form'
 
 export default function Registro() {      
@@ -23,7 +23,6 @@ export default function Registro() {
 
         axios.post('http://localhost:5000/register', usuario)
             .then(res => {
-                console.log(res);
                 history.push("/login");
             })
             .catch(e => {
@@ -35,7 +34,7 @@ export default function Registro() {
     
     return (
         <div className="wrap">
-            <div className="formulario">
+            <div className="container formulario">
                 <h1>PasaLista</h1>
                 <h3>¡Extensión para el manejo de asistencias por medio de plataformas
                     educativas virtuales como Google Meet!</h3>
