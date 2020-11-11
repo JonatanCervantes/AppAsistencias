@@ -23,12 +23,10 @@ router.route('/add').post((req, res)=>{
 });
 
 router.route('/relCurso').post((req, res)=>{
-    console.log(JSON.stringify(req.body));
+    //console.log(JSON.stringify(req.body));
 
     const usuario = req.body.usuario;
-    const curso = req.body.curso.data;
-    
-    console.log('ID DEL CURSO QUE LLEGA' + curso)
+    const curso = req.body.curso.data;    
 
     try {
         Usuario.findById(usuario).populate('cursos').exec((error, doc)=>{

@@ -4,6 +4,7 @@ import {BrowserRouter as Router, Route} from 'react-router-dom';
 import ListarCursos from './listarCursos.component';
 import AgregarCurso from './registrarCurso.component';
 import {UsuarioProvider} from '../auth/UsuarioContext'
+import ModificarCurso from './modificarCurso.component';
 
 export default function Cursos () {
     return (
@@ -15,6 +16,7 @@ export default function Cursos () {
                 <Route path="/cursos/listar" exact component={ListarCursos}/>    
                 <Route path="/cursos/agregar" exact component={AgregarCurso}/>  
                 </UsuarioProvider>
+                <Route path="/cursos/modificar" exact component={ModificarCurso}/>  
             </Router>
         </div>
     );    
