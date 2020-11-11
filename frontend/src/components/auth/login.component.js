@@ -62,7 +62,7 @@ export default function Login() {
             {errors.password && <p className="error">{errors.password.message}</p>}
           </div>
           <div className="form-group">
-            <input type="submit" value="Ingresar" className="btn btn-primary"></input>
+            <input type="submit" value="Ingresar" className="btn btn-dark"></input>
           </div>
         </form>
         <p className="error">{mensajeError}</p>
