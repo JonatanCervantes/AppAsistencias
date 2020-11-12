@@ -9,9 +9,8 @@ const Schema = mongoose.Schema;
 
 const usuarioSchema = new Schema({
     id: {
-        type: Number,
+        type: String,
         minlength: 11,
-        unique: true
     },
     nombre: {
         type: String,
@@ -24,19 +23,23 @@ const usuarioSchema = new Schema({
         required: [true, "El correo es necesario"],
     },
     nomInstitucion: {
-        type: String
+        type: String,
+        default: "",
     },
 
     nomDepartamento: {
-        type: String
+        type: String,
+        default: "",
     },
 
     numCubiculo: {
         type: Number,
+        default: 0,
     },
 
     telefono: {
-        type: Number,
+        type: String,
+        default: "",
     },
     
     password: {

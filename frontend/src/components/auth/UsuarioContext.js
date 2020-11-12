@@ -34,7 +34,7 @@ export const UsuarioProvider = (props) => {
     useEffect(obtenerUsuario, [token]);  
 
     return (
-        <UsuarioContext.Provider value ={[usuario, setUsuario, establecerToken]}>
+        <UsuarioContext.Provider value ={[usuario, establecerUsuario, establecerToken]}>
             {props.children}
         </UsuarioContext.Provider>
     );
