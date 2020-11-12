@@ -15,6 +15,9 @@ app.use(cors(corsOptions));
 app.use(express.json());
 
 const uri = process.env.ATLAS_URI;
+//LINEA DE CONEXION PARA BD LOCAL
+//mongoose.connect('mongodb://localhost:27017/myapp', {useNewUrlParser:true, useCreateIndex: true, useUnifiedTopology:true})
+//LINEA DE CONEXION PARA BD EN LA NUBE
 mongoose.connect(uri, {useNewUrlParser:true, useCreateIndex: true, useUnifiedTopology:true});
 
 const connection = mongoose.connection;

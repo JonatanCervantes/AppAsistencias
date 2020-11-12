@@ -8,14 +8,11 @@ let rolesValidos = {
 const Schema = mongoose.Schema;
 
 const usuarioSchema = new Schema({
-
     id: {
         type: Number,
         minlength: 11,
         unique: true
     },
-
-
     nombre: {
         type: String,
         minlength: 4,
@@ -53,6 +50,10 @@ const usuarioSchema = new Schema({
         required: [true],
         enum: rolesValidos,
     },
+
+    cursos: [{
+        type: mongoose.Schema.Types.ObjectId, ref:'Curso'
+    }],
 
 }, {
     timestamps: true
