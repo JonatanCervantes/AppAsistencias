@@ -45,7 +45,7 @@ export default function Registro() {
                             placeholder="Nombre" 
                             className="form-control box" 
                             name="name"
-                            ref={register({required:"*Nombre requerido",  pattern:{value: /^[a-zA-Z]+$/, message:"Solo letras"}, minLength:{value:4, message:"Min 4 caracteres"}, maxLength:{value:10, message:"Max 10 caracteres"}})}
+                            ref={register({required:"*Nombre requerido",  pattern:{value: /^[a-zA-Z\s]+$/, message:"Solo letras"}, minLength:{value:4, message:"Min 4 caracteres"}})}
                         ></input>
                         {errors.name && <p className="error">{errors.name.message}</p>}
                         <input 

@@ -5,6 +5,7 @@ import ListarCursos from './listarCursos.component';
 import AgregarCurso from './registrarCurso.component';
 import {UsuarioProvider} from '../auth/UsuarioContext'
 import ModificarCurso from './modificarCurso.component';
+import PrivateRoute from '../auth/privateRoute';
 
 export default function Cursos () {
     return (
@@ -13,10 +14,10 @@ export default function Cursos () {
                 <NavBarCursos/>
                 <br/>
                 <UsuarioProvider>
-                <Route path="/cursos/listar" exact component={ListarCursos}/>    
-                <Route path="/cursos/agregar" exact component={AgregarCurso}/>  
+                <PrivateRoute path="/cursos/listar" exact component={ListarCursos}/>    
+                <PrivateRoute path="/cursos/agregar" exact component={AgregarCurso}/>  
                 </UsuarioProvider>
-                <Route path="/cursos/modificar" exact component={ModificarCurso}/>  
+                <PrivateRoute path="/cursos/modificar" exact component={ModificarCurso}/>  
             </Router>
         </div>
     );    

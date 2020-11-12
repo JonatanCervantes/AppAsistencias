@@ -6,6 +6,7 @@ import {UsuarioProvider} from "./components/auth/UsuarioContext";
 
 import Navbar from "./components/navbar.component";
 import Perfil from "./components/perfil.component";
+import ModificarPerfil from "./components/modificarPerfil.component";
 import ListarCursos from "./components/cursos/listarCursos.component";
 import MenuCursos from "./components/cursos/menuCursos.component";
 import Asistencias from "./components/asistencias.component";
@@ -23,9 +24,11 @@ function App() {
       <br/>
       
       <UsuarioProvider>
+      <Route path="/" exact component={Login}/>
       <Route path="/registro" exact component={Registro} />
       <Route path="/login" exact component={Login}/>      
       <PrivateRoute path="/perfil" exact component={Perfil}/>
+      <PrivateRoute path="/perfil/editar" exact component={ModificarPerfil}/>
       <PrivateRoute path="/cursos" exact component={MenuCursos}/>
       <PrivateRoute path="/asistencias" exact component={Asistencias}/>
       </UsuarioProvider>
