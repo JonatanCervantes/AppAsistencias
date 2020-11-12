@@ -12,8 +12,7 @@ const usuarioSchema = new Schema({
     id: {
         type: Number,
         minlength: 11,
-        unique: true,
-        required: ['El id es necesario']
+        unique: true
     },
 
 
@@ -28,20 +27,21 @@ const usuarioSchema = new Schema({
         required: [true, "El correo es necesario"],
     },
     nomInstitucion: {
-        type: String,
-        required: ['Es necesario el nombre de la institución']
+        type: String
     },
 
     nomDepartamento: {
-        type: String,
-        requiered: ['Es necesario el nombre del departamento']
+        type: String
     },
 
     numCubiculo: {
         type: Number,
-        unique: true,
-        requiered: ['Es necesario el numero del cubiculo']
     },
+
+    telefono: {
+        type: Number,
+    },
+    
     password: {
         type: String,
         minlength: 6,

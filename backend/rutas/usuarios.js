@@ -42,5 +42,29 @@ router.route('/relCurso').post((req, res)=>{
     }
 });
 
+router.route('/modificar').put((req, res)=>{
+    const idUsuario = obtenerId(req);
+    const id = req.body.data.id;   
+    const nombre = req.body.data.nombre;
+    const nomInstitucion = req.body.data.nomInstitucion;
+    const nomDepartamento = req.body.data.nomDepartamento;
+    const numCubiculo = req.body.data.numCubiculo;
+    const telefono = req.body.data.telefono;
+
+    try {
+        Usuario.findByIdAndUpdate(idUsuario, {nombre:nombre}, {useFindAndModify:false}, (err, result)=>{
+            if(err) {
+                console.log(err);
+                res.json(err);
+            } else {
+                console.log(result);
+                res.json(result);
+            }
+        })
+    } catch (err) {
+        console.log('Error'+err);
+    }
+});
+
 module.exports = router;
 
