@@ -1,5 +1,7 @@
 import React from 'react';
 import {BrowserRouter as Router, Route} from 'react-router-dom';
+
+
 import "bootstrap/dist/css/bootstrap.min.css";
 
 import {UsuarioProvider} from "./components/auth/UsuarioContext";
@@ -14,6 +16,9 @@ import Index from './components/index.component';
 import Registro from './components/auth/registro.component';
 import Login from './components/auth/login.component';
 import PrivateRoute from './components/auth/privateRoute';
+// import ListarCursos from './listarCursos.component';
+import AgregarCurso from './components/cursos/registrarCurso.component';
+import ModificarCurso from './components/cursos/modificarCurso.component';
 
 
 function App() {
@@ -31,7 +36,10 @@ function App() {
       <PrivateRoute path="/perfil/editar" exact component={ModificarPerfil}/>
       <PrivateRoute path="/cursos" exact component={MenuCursos}/>
       <PrivateRoute path="/asistencias" exact component={Asistencias}/>
+      <PrivateRoute path="/cursos/listar" exact component={ListarCursos}/>    
+      <PrivateRoute path="/cursos/registrar" exact component={AgregarCurso}/>
       </UsuarioProvider>
+      <PrivateRoute path="/cursos/modificar" exact component={ModificarCurso}/> 
     </Router>
   );
 }

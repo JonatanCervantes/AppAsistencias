@@ -147,7 +147,7 @@ export default function Perfil() {
                 <br/>
 
                 <div className="form-group">
-                    <input type="submit" onClick={()=>modificarUsuario()} value="Editar" className="btn btn-primary"></input>
+                    <input type="submit" onClick={()=>modificarUsuario()} value="Editar" className="btn btn-dark"></input>
                 </div>
             </div>
             

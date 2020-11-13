@@ -106,7 +106,7 @@ export default function Cursos () {
                         {errors.unidades && <p className="error">{errors.unidades.message}</p>}
                     </div>
                     <div className="form-group d-flex flex-column justify-content-center">
-                        <input type="submit" value="Registrar curso" className="btn btn-primary"></input>
+                        <input type="submit" value="Registrar curso" className="btn btn-dark"></input>
                     </div>
                 </form>
                 <p className="error">{mensajeError}</p>
