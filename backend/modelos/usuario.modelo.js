@@ -10,7 +10,7 @@ const Schema = mongoose.Schema;
 const usuarioSchema = new Schema({
     id: {
         type: String,
-        minlength: 11,
+        
     },
     nombre: {
         type: String,
