@@ -102,7 +102,7 @@ export default function Perfil() {
                             defaultValue={usuario.numCubiculo} 
                             className="form-control box" 
                             name="cubiculo"
-                            ref={register({max:{value:30, message:"Valor maximo 30"}, min:{value:1, message:"Valor minimo 1"}})}
+                            ref={register({max:{value:30, message:"Valor maximo 30"}, min:{value:0, message:"Valor minimo 0"}})}
                         ></input>
                         {errors.cubiculo && <p className="error">{errors.cubiculo.message}</p>}
 
@@ -117,7 +117,7 @@ export default function Perfil() {
                         {errors.telefono && <p className="error">{errors.telefono.message}</p>}
                     </div>
                     <div className="form-group">
-                        <input type="submit" value="Guardar" className="btn btn-primary"></input>
+                        <input type="submit" value="Guardar" className="btn btn-dark"></input>
                     </div>
                 </form>
                 <AlertaExito/>

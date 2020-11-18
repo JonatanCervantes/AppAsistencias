@@ -21,7 +21,7 @@ export default function Registro() {
             "role":"MAESTRO"
         }        
 
-        axios.post('http://localhost:5000/register', usuario)
+        axios.post('http://localhost:5000/register/add', usuario)
             .then(res => {
                 history.push("/login");
             })
@@ -36,8 +36,7 @@ export default function Registro() {
         <div className="wrap">
             <div className="container formulario">
                 <h1>PasaLista</h1>
-                <h3>¡Extensión para el manejo de asistencias por medio de plataformas
-                    educativas virtuales como Google Meet!</h3>
+                <h3>Registro de un nuevo usuario</h3>
                 <form onSubmit={handleSubmit(onSubmit)}>
                     <div className="form-group d-flex flex-column justify-content-center">
                         <input 
@@ -66,7 +65,7 @@ export default function Registro() {
                         {errors.password && <p className="error">{errors.password.message}</p>}
                     </div>
                     <div className="form-group">
-                        <input type="submit" value="Registrarse" className="btn btn-primary"></input>
+                        <input type="submit" value="Registrarse" className="btn btn-dark"></input>
                     </div>
                 </form>
                 <p className="error">{mensajeError}</p>

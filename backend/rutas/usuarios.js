@@ -14,8 +14,9 @@ router.route('/').get((req, res)=>{
 
 router.route('/add').post((req, res)=>{
     const nombre = req.body.nombre;
+    const email = req.body.email;
     const contrasenia = req.body.contrasenia;
-    const nuevoUsuario = new Usuario({nombre,contrasenia});
+    const nuevoUsuario = new Usuario({nombre, email, contrasenia});
 
     nuevoUsuario.save()
         .then(()=> res.json('Usuario aniadido exitosamente'))

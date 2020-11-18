@@ -10,6 +10,6 @@ if (process.env.NODE_ENV === 'dev') {
 };
 process.env.URLDB = urlDB;
 
-process.env.CADUCIDAD_TOKEN = '1h';
+process.env.CADUCIDAD_TOKEN = '48h';
 
 process.env.TOKEN_SECRET = process.env.TOKEN_SECRET ||  'SECRETON';
