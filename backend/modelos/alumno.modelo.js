@@ -15,11 +15,6 @@ const alumnoSchema = new Schema({
         required: [true, "El correo es necesario"],
     },
 
-    asistencias: [{
-        type: mongoose.Schema.Types.ObjectId, ref: 'Asistencia'
-
-    }],
-
 
 }, {
     timestamps: true

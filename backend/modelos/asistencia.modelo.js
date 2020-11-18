@@ -1,10 +1,6 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
-let estadosValidos = {
-    values: ["PRESENTE", "AUSENTE", "RETARDO"],
-    message: '{VALUE} no es un role válido'
-}
 const asistenciaSchema = new Schema({
     fecha: {
         type: Date
@@ -14,24 +10,7 @@ const asistenciaSchema = new Schema({
         type: mongoose.Schema.Types.ObjectId, ref: 'Curso'
     },
 
-    //idAlumnos: [{
-    //type: mongoose.Schema.Types.ObjectId, ref: 'Alumno'
-
-    //  }],
-
-    // registro: [{
-    // type: String,
-    // default: "AUSENTE",
-    // enum: estadosValidos
-    // }],
-
-    loque: [{
-        type: mongoose.Schema.Types.ObjectId, ref: 'Alumno'
-    }][{
-            type: String,
-            default: "AUSENTE",
-            enum: estadosValidos
-        }],
+    registro: [],
 
 }, {
     timestamps: true
