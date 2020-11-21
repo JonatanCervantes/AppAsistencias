@@ -40,6 +40,12 @@ app.use('/cursos', cursosRouter);
 const gruposRouter = require('./rutas/grupos');
 app.use('/grupos', gruposRouter);
 
+const alumnosRouter = require('./rutas/alumnos');
+app.use('/alumnos', alumnosRouter);
+
+const asistenciasRouter = require('./rutas/asistencias');
+app.use('/asistencias', asistenciasRouter);
+
 app.listen(port, ()=>{
     console.log('Servidor corriendo en el puerto:' + port);
 });

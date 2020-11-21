@@ -57,19 +57,24 @@ const usuarioSchema = new Schema({
         type: mongoose.Schema.Types.ObjectId, ref:'Curso'
     }],
 
+    // QUIZA SEA NECESARIO AGREGAR UN ARREGLO PARA LOS ALUMNOS COMO EL SIGUIENTE:
+    // alumnos:[{
+    //     type:mongoose.Schema.Types.ObjectId, ref:'Alumno'
+    // }],
+
 }, {
     timestamps: true
 });
 
 // elimina la key password del objeto que retorna al momento de crear un usuario
-// usuarioSchema.methods.toJSON = function () {
-//     let user = this;
-//     let userObject = user.toObject();
-//     delete userObject.password;
-//     return userObject;
-// }
+usuarioSchema.methods.toJSON = function () {
+    let user = this;
+    let userObject = user.toObject();
+    delete userObject.password;
+    return userObject;
+}
 
-// usuarioSchema.plugin(uniqueValidator, {
-//     message: '{PATH} debe de ser único'
-// })
+usuarioSchema.plugin(uniqueValidator, {
+    message: '{PATH} debe de ser único'
+})
 module.exports = mongoose.model('Usuario', usuarioSchema)

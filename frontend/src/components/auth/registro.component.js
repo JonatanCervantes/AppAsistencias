@@ -21,7 +21,7 @@ export default function Registro() {
             "role":"MAESTRO"
         }        
 
-        axios.post('http://localhost:5000/register/add', usuario)
+        axios.post('http://localhost:5000/register/', usuario)
             .then(res => {
                 history.push("/login");
             })

@@ -12,20 +12,14 @@ router.route('/obtenerCursos').get((req, res)=>{
     const usuario = req.headers.authorization;
 
     try {
-        Usuario.findById(usuario).populate('cursos').then( usuario =>{
+        Usuario.findById(usuario).populate('cursos')
+        .then( usuario =>{
             res.json(usuario.cursos);
+        })
+        .catch(error=>{
+            res.status(400).json('Error' + error);
+            console.log(error);
         });
-
-        //     if(doc != undefined) {
-        //         console.log(doc);
-        //         console.log(doc.cursos);
-        //         res.json(doc);
-        //         // doc.cursos.push(curso);
-        //         // doc.save()
-        //         //     .then(()=> res.json('Curso aniadido al usuario exitosamente'))
-        //         //     .catch(error => res.status(400).json('Error: ' + error));
-        //     }            
-        // });
     } catch (err) {
         console.log('Error'+err);
     }
@@ -75,7 +69,7 @@ router.route('/modificar').put((req, res)=>{
     const clave = req.body.data.clave;
     const unidades = req.body.data.unidades;
     try {
-        Curso.findByIdAndUpdate(curso, {semestre:semestre, nombre:nombre, clave:clave, unidades:unidades}, {useFindAndModify:false}, (err, result)=>{
+        Curso.findByIdAndUpdate(curso, {semestre:semestre, nombre:nombre, clave:clave, unidades:unidades}, {useFindAndModify:false, new:true}, (err, result)=>{
             if(err) {
                 res.json(err);
             } else {

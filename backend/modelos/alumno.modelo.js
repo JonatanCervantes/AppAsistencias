@@ -15,6 +15,9 @@ const alumnoSchema = new Schema({
         required: [true, "El correo es necesario"],
     },
 
+    //De momento este atributo/columna no seria utilizada.
+    //Se utilizaria si fueramos a continuar el proyecto 
+    //(para ver las asistencias especificas de un alumno) pero de momento no es necesaria
     asistencias: [{
         type: mongoose.Schema.Types.ObjectId, ref: 'Asistencia'
 

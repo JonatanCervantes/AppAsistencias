@@ -17,7 +17,7 @@ export default function Cursos () {
     
 
     const obtenerCursos = ()=> {
-        const idUsuario = usuario._id;
+        const idUsuario = usuario._id;       
         axios.get('http://localhost:5000/cursos/obtenerCursos/',{headers:{authorization:idUsuario}})
         .then(res => { 
             console.log(res);
@@ -25,7 +25,7 @@ export default function Cursos () {
         })
         .catch(e => {        
             console.log(e);
-        })               
+        })      
     }
 
     const eliminarCurso = (idCurso)=> {
