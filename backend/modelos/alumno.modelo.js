@@ -15,6 +15,7 @@ const alumnoSchema = new Schema({
         required: [true, "El correo es necesario"],
     },
 
+<<<<<<< HEAD
     //De momento este atributo/columna no seria utilizada.
     //Se utilizaria si fueramos a continuar el proyecto 
     //(para ver las asistencias especificas de un alumno) pero de momento no es necesaria
@@ -23,6 +24,8 @@ const alumnoSchema = new Schema({
 
     }],
 
+=======
+>>>>>>> 6baa9e4f1609bd545aab5a7abe3d580badecf794
 
 }, {
     timestamps: true
