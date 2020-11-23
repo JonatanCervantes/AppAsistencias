@@ -19,6 +19,7 @@ import PrivateRoute from './components/auth/privateRoute';
 // import ListarCursos from './listarCursos.component';
 import AgregarCurso from './components/cursos/registrarCurso.component';
 import ModificarCurso from './components/cursos/modificarCurso.component';
+import AgregarAlumno from './components/alumnos/alumnos.component';
 
 
 function App() {
@@ -38,6 +39,7 @@ function App() {
       <PrivateRoute path="/asistencias" exact component={Asistencias}/>
       <PrivateRoute path="/cursos/listar" exact component={ListarCursos}/>    
       <PrivateRoute path="/cursos/registrar" exact component={AgregarCurso}/>
+      <PrivateRoute path="/alumnos/registrar" exact component={AgregarAlumno}/>
       </UsuarioProvider>
       <PrivateRoute path="/cursos/modificar" exact component={ModificarCurso}/> 
     </Router>

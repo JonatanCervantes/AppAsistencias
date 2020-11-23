@@ -37,7 +37,7 @@ export default class Navegacion extends Component {
             // </nav>
             <div>
                 <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
-                <Navbar.Brand href="#home">Pasalista</Navbar.Brand>
+                <Navbar.Brand href="/">Pasalista</Navbar.Brand>
                 <Navbar.Toggle aria-controls="responsive-navbar-nav" />
                 <Navbar.Collapse id="responsive-navbar-nav">
                     <Nav className="mr-auto">
@@ -49,6 +49,7 @@ export default class Navegacion extends Component {
                         
                         {/* {/* <NavDropdown.Divider />} */}
                     </NavDropdown>
+                    <Nav.Link ><Link to="/alumnos/registrar">Alumnos</Link></Nav.Link>
                     </Nav>
                     <Nav>
                     <Nav.Link ><Link to="/login" onClick={this.logout}>Cerrar Sesión</Link></Nav.Link>  
