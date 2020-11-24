@@ -97,3 +97,12 @@
     p.error {
         color: red;
     }
+
+    h1.alumno {
+        text-align: center;
+        margin-bottom: 4vh;
+    }
+
+    div.s-alumno {
+        margin-top: 4vh;
+    }

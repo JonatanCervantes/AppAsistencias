@@ -58,9 +58,9 @@ const usuarioSchema = new Schema({
     }],
 
     // QUIZA SEA NECESARIO AGREGAR UN ARREGLO PARA LOS ALUMNOS COMO EL SIGUIENTE:
-    // alumnos:[{
-    //     type:mongoose.Schema.Types.ObjectId, ref:'Alumno'
-    // }],
+    alumnos:[{
+        type:mongoose.Schema.Types.ObjectId, ref:'Alumno'
+    }],
 
 }, {
     timestamps: true
