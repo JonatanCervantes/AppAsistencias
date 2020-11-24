@@ -23,6 +23,18 @@ export default function Alumnos () {
             axios.post('http://localhost:5000/alumnos/add', alumno)
             .then(res => {                
                 console.log(res);
+                asignarAlumnoAUsuario(usuario._id, res);          
+            })
+            .catch(e => {
+                console.log(e);
+                mostrarMensajeError();
+            });
+        }   
+        
+        const asignarAlumnoAUsuario = async (idUsuario,res)=>{
+            axios.post('http://localhost:5000/usuarios/relAlumno', {"usuario":idUsuario, "alumno":res})
+            .then(res => {                
+                console.log(res);
                 borrarCampos();
                 setShow(true);
             })
@@ -30,7 +42,7 @@ export default function Alumnos () {
                 console.log(e);
                 mostrarMensajeError();
             });
-        }      
+        }   
 
         const borrarCampos = () => { 
             document.getElementById("forma-alumnos").reset();

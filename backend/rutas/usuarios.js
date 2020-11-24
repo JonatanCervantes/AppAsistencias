@@ -67,5 +67,25 @@ router.route('/modificar').put((req, res)=>{
     }
 });
 
+router.route('/relAlumno').post((req, res)=>{
+    //console.log(JSON.stringify(req.body));
+
+    const usuario = req.body.usuario;
+    const alumno = req.body.alumno.data;    
+
+    try {
+        Usuario.findById(usuario).populate('alumnos').exec((error, doc)=>{
+            if(doc != undefined) {
+                doc.alumnos.push(alumno);
+                doc.save()
+                    .then(()=> res.json('Alumno añadido al usuario exitosamente'))
+                    .catch(error => res.status(400).json('Error: ' + error));
+            }            
+        });
+    } catch (err) {
+        console.log('Error'+err);
+    }
+});
+
 module.exports = router;
 
