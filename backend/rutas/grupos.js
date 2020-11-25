@@ -1,6 +1,4 @@
 const router = require('express').Router();
-const { models } = require('mongoose');
-const { func } = require('prop-types');
 let Grupo = require('../modelos/grupo.modelo');
 
 router.route('/').get((req, res)=>{
