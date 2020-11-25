@@ -30,7 +30,10 @@ export default class Navegacion extends Component {
                         <NavDropdown.Item><Link to="/alumnos/listar">Ver alumnos</Link></NavDropdown.Item>
                         <NavDropdown.Item><Link to="/alumnos/registrar">Registrar alumnos</Link></NavDropdown.Item>  
                     </NavDropdown>
-                    {/* <Nav.Link ><Link to="/alumnos/registrar">Alumnos</Link></Nav.Link> */}
+                    <NavDropdown title="Asistencias" id="collasible-nav-dropdown">
+                        <NavDropdown.Item><Link to="/asistencias/listar">Ver asistencias</Link></NavDropdown.Item>
+                        <NavDropdown.Item><Link to="/asistencias/registrar">Registrar asistencias</Link></NavDropdown.Item>  
+                    </NavDropdown>                    
                     </Nav>
                     <Nav>
                     <Nav.Link ><Link to="/login" onClick={this.logout}>Cerrar Sesión</Link></Nav.Link>  
