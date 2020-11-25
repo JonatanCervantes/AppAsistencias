@@ -1,5 +1,5 @@
 import React, {useContext, useState} from 'react';
-import {UsuarioContext} from "../auth/UsuarioContext";
+import {UsuarioContext} from "../../contexts/UsuarioContext";
 import axios from 'axios';
 import {useForm} from 'react-hook-form';
 import Alert from 'react-bootstrap/Alert';

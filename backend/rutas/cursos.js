@@ -69,7 +69,8 @@ router.route('/modificar').put((req, res)=>{
     const clave = req.body.data.clave;
     const unidades = req.body.data.unidades;
     try {
-        Curso.findByIdAndUpdate(curso, {semestre:semestre, nombre:nombre, clave:clave, unidades:unidades}, {useFindAndModify:false, new:true}, (err, result)=>{
+        Curso.findByIdAndUpdate(curso, {semestre:semestre, nombre:nombre, 
+            clave:clave, unidades:unidades}, {useFindAndModify:false, new:true}, (err, result)=>{
             if(err) {
                 res.json(err);
             } else {

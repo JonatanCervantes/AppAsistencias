@@ -3,7 +3,7 @@ import { useHistory } from 'react-router-dom';
 import axios from 'axios';
 import '../style/style.css';
 import {useForm} from 'react-hook-form';
-import {UsuarioContext} from "./UsuarioContext";
+import {UsuarioContext} from "../../contexts/UsuarioContext";
 
 export default function Login() {
   const {register, handleSubmit, errors} = useForm(); 

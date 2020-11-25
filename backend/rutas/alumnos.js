@@ -1,5 +1,6 @@
 const router = require('express').Router();
 let Alumno = require('../modelos/alumno.modelo');
+let Usuario = require('../modelos/usuario.modelo');
 
 router.route('/').get((req, res)=>{
     Alumno.find()

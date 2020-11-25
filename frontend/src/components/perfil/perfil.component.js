@@ -1,12 +1,12 @@
 import React, { useContext } from 'react';
 import ReactDOM from 'react-dom';
-import { UsuarioContext } from "./auth/UsuarioContext";
+import { UsuarioContext } from "../../contexts/UsuarioContext";
 import { useHistory } from 'react-router-dom';
 import axios from 'axios';
 
-import edit from '../assets/edit.png';
-import add from '../assets/add.png';
-import save from '../assets/save.png';
+import edit from '../../assets/edit.png';
+import add from '../../assets/add.png';
+import save from '../../assets/save.png';
 
 export default function Perfil() {
     const [usuario, setUsuario] = useContext(UsuarioContext);

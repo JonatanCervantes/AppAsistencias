@@ -3,7 +3,7 @@ import NavBarCursos from './navBarCursos.component';
 import {BrowserRouter as Router, Route} from 'react-router-dom';
 import ListarCursos from './listarCursos.component';
 import AgregarCurso from './registrarCurso.component';
-import {UsuarioProvider} from '../auth/UsuarioContext'
+import {UsuarioProvider} from '../../contexts/UsuarioContext'
 import ModificarCurso from './modificarCurso.component';
 import PrivateRoute from '../auth/privateRoute';
 

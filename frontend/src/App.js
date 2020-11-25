@@ -1,22 +1,19 @@
 import React from 'react';
 import {BrowserRouter as Router, Route} from 'react-router-dom';
 
-
 import "bootstrap/dist/css/bootstrap.min.css";
 
-import {UsuarioProvider} from "./components/auth/UsuarioContext";
+import {UsuarioProvider} from "./contexts/UsuarioContext";
 
 import Navbar from "./components/navbar.component";
-import Perfil from "./components/perfil.component";
-import ModificarPerfil from "./components/modificarPerfil.component";
+import Perfil from "./components/perfil/perfil.component";
+import ModificarPerfil from "./components/perfil/modificarPerfil.component";
 import ListarCursos from "./components/cursos/listarCursos.component";
 import MenuCursos from "./components/cursos/menuCursos.component";
-import Asistencias from "./components/asistencias.component";
-import Index from './components/index.component';
+import Asistencias from "./components/asistencias/asistencias.component";
 import Registro from './components/auth/registro.component';
 import Login from './components/auth/login.component';
 import PrivateRoute from './components/auth/privateRoute';
-// import ListarCursos from './listarCursos.component';
 import AgregarCurso from './components/cursos/registrarCurso.component';
 import ModificarCurso from './components/cursos/modificarCurso.component';
 import AgregarAlumno from './components/alumnos/registrarAlumno.component';
