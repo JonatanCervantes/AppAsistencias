@@ -1,46 +1,46 @@
-import React, {Component} from 'react';
-import {Link} from 'react-router-dom';
+import React, { Component, useRef } from 'react';
+import { Link } from 'react-router-dom';
 import { authenticationService } from './services/authentication.service';
 import Navbar from 'react-bootstrap/Navbar';
 import Nav from 'react-bootstrap/Nav';
 import NavDropdown from 'react-bootstrap/NavDropdown';
 
-export default class Navegacion extends Component {
+export default function NavegacionPrincipal() {
+    const refContainer = useRef(null);
 
-    logout() {
+    const logout = () => {
         authenticationService.logout();
     }
-    
-    render() {
-        return (
-            <div>
-                <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
+
+    return (
+        <div>
+            <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
                 <Navbar.Brand href="/">Pasalista</Navbar.Brand>
                 <Navbar.Toggle aria-controls="responsive-navbar-nav" />
-                <Navbar.Collapse id="responsive-navbar-nav">
+                <Navbar.Collapse id="responsive-navbar-nav" ref={refContainer}>
                     <Nav className="mr-auto">
-                    <Nav.Link><Link to="/login">Login</Link></Nav.Link>
-                    <Nav.Link ><Link to="/perfil">Perfil</Link></Nav.Link>
-                    <NavDropdown title="Cursos" id="collasible-nav-dropdown">
-                        <NavDropdown.Item><Link to="/cursos/listar">Ver cursos</Link></NavDropdown.Item>
-                        <NavDropdown.Item><Link to="/cursos/registrar">Registrar cursos</Link></NavDropdown.Item>                        
-                        {/* {/* <NavDropdown.Divider />} */}
-                    </NavDropdown>
-                    <NavDropdown title="Alumnos" id="collasible-nav-dropdown">
-                        <NavDropdown.Item><Link to="/alumnos/listar">Ver alumnos</Link></NavDropdown.Item>
-                        <NavDropdown.Item><Link to="/alumnos/registrar">Registrar alumnos</Link></NavDropdown.Item>  
-                    </NavDropdown>
-                    <NavDropdown title="Asistencias" id="collasible-nav-dropdown">
-                        <NavDropdown.Item><Link to="/asistencias/listar">Ver asistencias</Link></NavDropdown.Item>
-                        <NavDropdown.Item><Link to="/asistencias/registrar">Registrar asistencias</Link></NavDropdown.Item>  
-                    </NavDropdown>                    
+                        <Nav.Link as={Link} to="/login">Login</Nav.Link>
+                        <Nav.Link as={Link} to="/perfil">Perfil</Nav.Link>
+                        <NavDropdown title="Cursos" id="collasible-nav-dropdown">
+                            <NavDropdown.Item as={Link} to="cursos/listar">Ver cursos</NavDropdown.Item>
+                            <NavDropdown.Item as={Link} to="/cursos/registrar">Registrar cursos</NavDropdown.Item>
+
+                        </NavDropdown>
+                        <NavDropdown title="Alumnos" id="collasible-nav-dropdown">
+                            <NavDropdown.Item as={Link} to="/alumnos/listar">Ver alumnos</NavDropdown.Item>
+                            <NavDropdown.Item as={Link} to="/alumnos/registrar">Registrar alumnos</NavDropdown.Item>
+                        </NavDropdown>
+                        <NavDropdown title="Asistencias" id="collasible-nav-dropdown" >
+                            <NavDropdown.Item as={Link} to="/asistencias/listar">Ver asistencias</NavDropdown.Item>
+                            <NavDropdown.Item as={Link} to="/asistencias/registrar">Registrar asistencias</NavDropdown.Item>
+                        </NavDropdown>
                     </Nav>
                     <Nav>
-                    <Nav.Link ><Link to="/login" onClick={this.logout}>Cerrar Sesión</Link></Nav.Link>  
+                        <Nav.Link as={Link} to="/login" onClick={logout}>Cerrar Sesión</Nav.Link>
                     </Nav>
                 </Navbar.Collapse>
-                </Navbar>
-            </div>
-        );
-    }
+            </Navbar>
+        </div>
+    );
+
 }

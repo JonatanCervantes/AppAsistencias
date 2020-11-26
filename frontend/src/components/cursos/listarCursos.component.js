@@ -75,8 +75,8 @@ export default function Cursos() {
         <div className="mx-auto" >
             <h1>Cursos registrados: </h1>
 
-            <table class="table">
-                <thead class="thead-dark">
+            <table className="table">
+                <thead className="thead-dark">
                     <tr>
                         <th scope="col">Período</th>
                         <th scope="col">Nombre</th>
@@ -87,9 +87,9 @@ export default function Cursos() {
                 </thead>
                 <tbody>
                     {
-                        cursos.map(curso => {
+                        cursos.map((curso, idx) => {
                             return (
-                                <tr>
+                                <tr key={idx}>
                                     <th scope="row">{curso.semestre}</th>
                                     <td>{curso.nombre}</td>
                                     <td>{curso.clave}</td>

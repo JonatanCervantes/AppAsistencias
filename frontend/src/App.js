@@ -10,7 +10,6 @@ import Navbar from "./components/navbar.component";
 import Perfil from "./components/perfil/perfil.component";
 import ModificarPerfil from "./components/perfil/modificarPerfil.component";
 import ListarCursos from "./components/cursos/listarCursos.component";
-import MenuCursos from "./components/cursos/menuCursos.component";
 import ListarAsistencias from "./components/asistencias/registrarAsistencias.component";
 import RegistrarAsistencias from "./components/asistencias/registrarAsistencias.component";
 import Registro from './components/auth/registro.component';
@@ -36,7 +35,6 @@ function App() {
           <Route path="/login" exact component={Login} />
           <PrivateRoute path="/perfil" exact component={Perfil} />
           <PrivateRoute path="/perfil/editar" exact component={ModificarPerfil} />
-          <PrivateRoute path="/cursos" exact component={MenuCursos} />
           <PrivateRoute path="/asistencias/listar" exact component={ListarAsistencias} />
           <PrivateRoute path="/asistencias/registrar" exact component={RegistrarAsistencias} />
           <PrivateRoute path="/cursos/listar" exact component={ListarCursos} />
