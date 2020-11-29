@@ -4,12 +4,19 @@ import es from 'date-fns/locale/es';
 
 export function Calendar(props) {
     const [fechaSeleccionada, setFechaSeleccionada] = useState(props.value);
+
     const handleChange = (date, event) => {
         setFechaSeleccionada(date);
         props.onChange(date);
     }
 
-    //useEffect(handleChange(props.value, null), [props.value]);
+    const verificarFechasDistintas = () => {
+        if (props.value != fechaSeleccionada) {
+            setFechaSeleccionada(props.value);
+        }
+    }
+
+    useEffect(verificarFechasDistintas, [props.value]);
 
     return (
         <DatePicker

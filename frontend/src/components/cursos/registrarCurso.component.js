@@ -1,11 +1,13 @@
 import React, { useContext, useState } from 'react';
 import { UsuarioContext } from "../../contexts/UsuarioContext";
+import { CursosContext } from "../../contexts/CursosContext";
 import axios from 'axios';
 import { useForm } from 'react-hook-form';
 import Alert from 'react-bootstrap/Alert';
 
 export default function Cursos() {
     const [usuario, setUsuario] = useContext(UsuarioContext);
+    const [cursos, setCursos] = useContext(CursosContext);
     const { register, handleSubmit, errors } = useForm();
     const [mensajeError, setMensajeError] = useState("");
 
@@ -38,11 +40,24 @@ export default function Cursos() {
                     console.log(res);
                     borrarCampos();
                     setShow(true);
+                    establecerCursosEnContext();
                 })
                 .catch(e => {
                     console.log(e);
                     mostrarMensajeError();
                 });
+        }
+
+        const establecerCursosEnContext = () => {
+            const idUsuario = usuario._id;
+            axios.get('http://localhost:5000/cursos/obtenerCursos/', { headers: { authorization: idUsuario } })
+                .then(res => {
+                    console.log(res);
+                    setCursos(res.data)
+                })
+                .catch(e => {
+                    console.log(e);
+                })
         }
 
         const borrarCampos = () => {

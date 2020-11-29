@@ -11,8 +11,8 @@ export default function Asistencias() {
 
 
     const obtenerAsistencias = () => {
-        const idUsuario = usuario._id;
-        axios.get('http://localhost:5000/asistencias/obtenerAsistencias/', { headers: { authorization: idUsuario } })
+        //const idUsuario = usuario._id;
+        axios.get('http://localhost:5000/asistencias/obtenerAsistencias/', { headers: { authorization: usuario.cursos[0] } })
             .then(res => {
                 console.log(res.data);
                 establecerAsistencias(res.data);

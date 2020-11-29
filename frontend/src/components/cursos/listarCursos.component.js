@@ -8,15 +8,11 @@ import eliminar from '../../assets/delete.png';
 import ver from '../../assets/lookup.png';
 import editar from '../../assets/edit.png';
 
-
-
-export default function Cursos() {
+export default function Cursos(props) {
     const [usuario, setUsuario] = useContext(UsuarioContext);
     const [cursos, setCursos] = useContext(CursosContext);
-    //const [cursos, setCursos] = useState([{}]);
 
     const history = useHistory();
-
 
     const obtenerCursos = () => {
         const idUsuario = usuario._id;
@@ -67,9 +63,6 @@ export default function Cursos() {
     function establecerCursos(cursos) {
         setCursos(cursos);
     }
-
-    //HACER CONTEXT DE CURSOS
-    useEffect(obtenerCursos, []);
 
     return (
         <div className="mx-auto" >

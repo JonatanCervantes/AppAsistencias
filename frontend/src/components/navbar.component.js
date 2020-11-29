@@ -22,7 +22,7 @@ export default function NavegacionPrincipal() {
                         <Nav.Link as={Link} to="/login">Login</Nav.Link>
                         <Nav.Link as={Link} to="/perfil">Perfil</Nav.Link>
                         <NavDropdown title="Cursos" id="collasible-nav-dropdown">
-                            <NavDropdown.Item as={Link} to="cursos/listar">Ver cursos</NavDropdown.Item>
+                            <NavDropdown.Item as={Link} to="/cursos/listar">Ver cursos</NavDropdown.Item>
                             <NavDropdown.Item as={Link} to="/cursos/registrar">Registrar cursos</NavDropdown.Item>
 
                         </NavDropdown>

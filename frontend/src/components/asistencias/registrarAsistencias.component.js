@@ -22,6 +22,7 @@ export default function Asistencias() {
     const { register, handleSubmit, errors } = useForm();
     const [cursoSeleccionado, setCursoSeleccionado] = useState('');
     const [fechaSeleccionada, setFechaSeleccionada] = useState(new Date());
+    const [nuevaFechaCsv, setNuevaFechaCsv] = useState(new Date());
     const refForm = useRef(null);
 
     const prepararArreglo = (datos) => {
@@ -36,14 +37,14 @@ export default function Asistencias() {
         return true;
     }
 
-    const seleccionarCurso = new Promise((resolve, reject) => {
-        if (cursos.length > 0 && cursoSeleccionado == '') {
-            setCursoSeleccionado(cursos[0]._id);
-            resolve(true);
-        } else {
-            resolve(false);
-        }
-    })
+    // const seleccionarCurso = new Promise((resolve, reject) => {
+    //     if (cursos.length > 0) {
+    //         setCursoSeleccionado(cursos[0]._id);
+    //         resolve(true);
+    //     } else {
+    //         resolve(false);
+    //     }
+    // })
 
     const onSubmit = (data) => {
         const realizarVerificacion = () => {
@@ -131,8 +132,10 @@ export default function Asistencias() {
     }
 
     const handleChange = (event) => {
-        console.log(event.target.value);
-        setCursoSeleccionado(cursos[event.target.value]._id);
+        const cursoId = event.target.value;
+        if (cursoId != cursoSeleccionado) {
+            setCursoSeleccionado(cursoId);
+        }
     }
 
     const handleChangeFecha = (nuevoValor) => {
@@ -146,9 +149,8 @@ export default function Asistencias() {
             cargarCsv(text)
                 .then((data) => {
                     filtrarDatos(data).then((respuesta) => {
-                        console.log(respuesta.curso);
-                        handleChangeFecha(respuesta.fecha);
-                        //console.log(respuesta.fecha);
+                        encontrarCursoCoincidencia(respuesta.curso);
+                        setFechaSeleccionada(respuesta.fecha);
                         establecerAlumnosArreglo(respuesta.alumnos);
                     });
                 })
@@ -157,6 +159,14 @@ export default function Asistencias() {
                 });
         };
         reader.readAsText(e.target.files[0]);
+    }
+
+    const encontrarCursoCoincidencia = (nombreCurso) => {
+        for (var i = 0; i < cursos.length; i++) {
+            if (cursos[i].nombre.trim() == nombreCurso) {
+                setCursoSeleccionado(cursos[i]._id);
+            }
+        }
     }
 
     const RegistroAlumnos = () => {
@@ -194,11 +204,11 @@ export default function Asistencias() {
             <Form onSubmit={handleSubmit(onSubmit)} id="forma-asistencias" ref={refForm}>
                 <Form.Group id="seleccionar-curso">
                     <Form.Label>Curso</Form.Label>
-                    <Form.Control onChange={handleChange} as="select" custom>
-                        {cursos.map((curso, idx) =>
-                            <option key={curso._id} value={idx}>{curso.nombre}</option>
-                        )}
-                    </Form.Control>
+                    <select value={cursoSeleccionado} onChange={handleChange} >
+                        {cursos.map((curso, idx) => (
+                            <option key={curso._id} value={curso._id}>{curso.nombre}</option>
+                        ))}
+                    </select>
                 </Form.Group>
 
                 <Form.Group id="seleccionar-grupo">
@@ -217,7 +227,7 @@ export default function Asistencias() {
 
                 <Form.Label>Fecha</Form.Label>
                 <br />
-                <Calendar value={fechaSeleccionada} onChange={handleChangeFecha} />
+                <Calendar value={fechaSeleccionada} onChange={handleChangeFecha} nuevaFechaCsv={nuevaFechaCsv} />
                 <br />
                 <br />
 
