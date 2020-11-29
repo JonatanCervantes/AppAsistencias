@@ -10,7 +10,7 @@ import Navbar from "./components/navbar.component";
 import Perfil from "./components/perfil/perfil.component";
 import ModificarPerfil from "./components/perfil/modificarPerfil.component";
 import ListarCursos from "./components/cursos/listarCursos.component";
-import ListarAsistencias from "./components/asistencias/registrarAsistencias.component";
+import ListarAsistencias from "./components/asistencias/listarAsistencias.component";
 import RegistrarAsistencias from "./components/asistencias/registrarAsistencias.component";
 import Registro from './components/auth/registro.component';
 import Login from './components/auth/login.component';
