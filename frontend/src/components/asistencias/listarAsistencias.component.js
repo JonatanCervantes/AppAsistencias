@@ -1,10 +1,12 @@
 import React, { useContext, useState, useEffect } from 'react';
 import { UsuarioContext } from "../../contexts/UsuarioContext";
+import { CursosContext } from "../../contexts/CursosContext";
 import axios from 'axios';
 import { useHistory } from 'react-router-dom';
 
 export default function Asistencias() {
     const [usuario, setUsuario] = useContext(UsuarioContext);
+    const [cursos, setCursos] = useContext(CursosContext);
     const [asistencias, setAsistencias] = useState([{}]);
 
     const history = useHistory();
@@ -12,7 +14,7 @@ export default function Asistencias() {
 
     const obtenerAsistencias = () => {
         const idUsuario = usuario._id;
-        axios.get('http://localhost:5000/asistencias/obtenerAsistencias/', { headers: { authorization: idUsuario } })
+        axios.get('http://localhost:5000/asistencias/obtenerAsistencias/', { headers: { authorization: usuario.cursos[0] } })
             .then(res => {
                 console.log(res.data);
                 establecerAsistencias(res.data);
@@ -37,7 +39,7 @@ export default function Asistencias() {
                     <tr>
                         <th scope="col">Curso</th>
                         <th scope="col">Fecha</th>
-                        <th scope="col">Asistencias</th>
+                        <th scope="col">Alumno</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -45,8 +47,9 @@ export default function Asistencias() {
                         asistencias.map((asistencia, idx) => {
                             return (
                                 <tr key={idx}>
-                                    <th scope="row">{asistencia.curso}</th>
+                                    <td>{cursos[0].nombre}</td>
                                     <td>{asistencia.fecha}</td>
+                                    <td>{asistencia.registro}</td>
                                 </tr>
                             )
                         })
