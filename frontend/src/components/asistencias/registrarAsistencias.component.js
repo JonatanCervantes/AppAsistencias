@@ -3,35 +3,17 @@ import Form from 'react-bootstrap/Form'
 import { UsuarioContext } from "../../contexts/UsuarioContext";
 import { CursosContext } from "../../contexts/CursosContext";
 
-import DatePicker from "react-datepicker";
-import "react-datepicker/dist/react-datepicker.css";
-import es from 'date-fns/locale/es';
 import Button from 'react-bootstrap/Button';
 
 import { useForm } from 'react-hook-form';
 import axios from 'axios';
 import Alert from 'react-bootstrap/Alert';
 
-const Calendar = (props) => {
-    const [fechaSeleccionada, setFechaSeleccionada] = useState(props.value);
-    const handleChange = (date, event) => {
-        setFechaSeleccionada(date);
-        props.onChange(date);
-    }
+import { cargarCsv } from './csvParser';
+import { filtrarDatos } from './filtrarDatosAsistencia';
 
-    return (
-        <DatePicker
-            selected={fechaSeleccionada}
-            onChange={(date, e) => handleChange(date, e)}
-            locale={es}
-            showTimeSelect
-            timeFormat='p'
-            timeCaption="Hora"
-            dateFormat="dd/MM/yyyy h:mm aa"
-            name="fecha"
-        />
-    );
-};
+import { Calendar } from './calendar.component';
+import "react-datepicker/dist/react-datepicker.css";
 
 export default function Asistencias() {
     const [usuario, setUsuario] = useContext(UsuarioContext);
@@ -51,14 +33,12 @@ export default function Asistencias() {
     const verificarDatos = (cur, alu) => {
         if (alu.length == 0) return false;
         if (cur.length == 0) return false;
-
         return true;
     }
 
     const seleccionarCurso = new Promise((resolve, reject) => {
         if (cursos.length > 0 && cursoSeleccionado == '') {
             setCursoSeleccionado(cursos[0]._id);
-            console.log(cursos[0]._id);
             resolve(true);
         } else {
             resolve(false);
@@ -70,15 +50,16 @@ export default function Asistencias() {
             if (!verificarDatos(cursoSeleccionado, alumnos)) {
                 console.log("Datos invalidos");
                 mostrarMensajeError();
-                return;
+                return false;
             }
+            return true;
         }
 
-        seleccionarCurso.then(realizarVerificacion);
+        if (!realizarVerificacion()) return;
 
         const registro = prepararArreglo(alumnos);
         const asistencia = {
-            "curso": cursoSeleccionado,
+            "idCurso": cursoSeleccionado,
             "fecha": fechaSeleccionada,
             "registro": registro,
         }
@@ -114,12 +95,10 @@ export default function Asistencias() {
         setMensajeError("Error al agregar curso");
     }
 
+
     const agregarAlumno = () => {
         if (alumnos.length < 40) {
-            establecerAlumnos({
-                nombre: '',
-                asistencia: false
-            });
+            establecerAlumnos({ nombre: '', asistencia: false });
         } else {
             console.log("Demasiados alumnos");
         }
@@ -128,7 +107,12 @@ export default function Asistencias() {
     const establecerAlumnos = (alum) => {
         const copia = [...alumnos, alum];
         setAlumnos(copia);
-        console.log(alumnos);
+    }
+
+    const establecerAlumnosArreglo = (arregloAlumnosImportados) => {
+        var copia = alumnos;
+        copia = copia.concat(arregloAlumnosImportados);
+        setAlumnos(copia);
     }
 
     const handleBlur = (tags, tipo) => (event) => {
@@ -153,6 +137,26 @@ export default function Asistencias() {
 
     const handleChangeFecha = (nuevoValor) => {
         setFechaSeleccionada(nuevoValor);
+    }
+
+    const handleFileUpload = async (e) => {
+        const reader = new FileReader();
+        reader.onload = async (e) => {
+            const text = (e.target.result);
+            cargarCsv(text)
+                .then((data) => {
+                    filtrarDatos(data).then((respuesta) => {
+                        console.log(respuesta.curso);
+                        handleChangeFecha(respuesta.fecha);
+                        //console.log(respuesta.fecha);
+                        establecerAlumnosArreglo(respuesta.alumnos);
+                    });
+                })
+                .catch((err) => {
+                    console.log(err);
+                });
+        };
+        reader.readAsText(e.target.files[0]);
     }
 
     const RegistroAlumnos = () => {
@@ -236,7 +240,7 @@ export default function Asistencias() {
                 <div className="mb-3">
                     <Form.File id="formcheck-api-regular">
                         <Form.File.Label>Generar asistencia con CSV</Form.File.Label>
-                        <Form.File.Input />
+                        <Form.File.Input type="file" accept=".csv" onChange={handleFileUpload} />
                     </Form.File>
                 </div>
 
