@@ -36,7 +36,7 @@ export default function Registro() {
         <div className="wrap">
             <div className="container formulario">
                 <h1>PasaLista</h1>
-                <h3>Registro de un nuevo usuario</h3>
+                <h3><small class="text-muted">Registro de un nuevo usuario</small></h3>
                 <form onSubmit={handleSubmit(onSubmit)}>
                     <div className="form-group d-flex flex-column justify-content-center">
                         <input 

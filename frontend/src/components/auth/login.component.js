@@ -41,8 +41,8 @@ export default function Login() {
     <div className="wrap">
       <div className="container formulario">
         <h1>PasaLista</h1>
-        <h3>¡Aplicación para el manejo de asistencias por medio de plataformas
-                      educativas virtuales como Google Meet!</h3>        
+        <h3><small class="text-muted">¡Aplicación para el manejo de asistencias por medio de plataformas
+                      educativas virtuales como Google Meet!</small></h3>        
         <form onSubmit={handleSubmit(onSubmit)}>
           <div className="form-group d-flex flex-column justify-content-center">
             <input 
