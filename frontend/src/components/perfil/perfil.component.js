@@ -99,7 +99,7 @@ export default function Perfil() {
 
     return (
         <div className="wrap">
-            <div className="container profile">
+            <div className="container profile col-sm-12 my-14 table table-dark">
                 <h1>Perfil</h1>
 
                 <div className="element">

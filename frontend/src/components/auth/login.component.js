@@ -39,8 +39,8 @@ export default function Login() {
 
   return (
     <div className="wrap">
-      <div className="container formulario">
-        <h1>PasaLista</h1>
+      <div className="container formulario col-sm-6"> 
+        <h1 className="text-uppercase">PasaLista</h1>
         <h3><small class="text-muted">¡Aplicación para el manejo de asistencias por medio de plataformas
                       educativas virtuales como Google Meet!</small></h3>        
         <form onSubmit={handleSubmit(onSubmit)}>

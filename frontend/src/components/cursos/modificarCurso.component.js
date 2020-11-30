@@ -56,7 +56,7 @@ export default function Cursos (props) {
 
     return (
         <div className="wrap">
-            <div className="formulario">
+            <div className="formulario col-sm-7">
                 <h1>Modificación de curso</h1>
                 <form id="forma-cursos" onSubmit={handleSubmit(onSubmit)}>
                     <div className="form-group d-flex flex-column justify-content-center">
@@ -94,7 +94,7 @@ export default function Cursos (props) {
                         {errors.unidades && <p className="error">{errors.unidades.message}</p>}
                     </div>
                     <div className="form-group d-flex flex-column justify-content-center">
-                        <input type="submit" value="Modificar curso" className="btn btn-primary"></input>
+                        <input type="submit" value="Modificar curso" className="btn btn-dark"></input>
                     </div>
                 </form>
                 <p className="error">{mensajeError}</p>

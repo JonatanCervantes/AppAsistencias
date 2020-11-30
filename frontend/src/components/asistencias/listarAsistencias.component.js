@@ -32,7 +32,7 @@ export default function Asistencias() {
     useEffect(obtenerAsistencias, []);
 
     return (
-        <div className="mx-auto" >
+        <div className="mx-auto table-dark" >
             <h1>Asistencias: </h1>
             <table className="table">
                 <thead className="thead-dark">
@@ -57,6 +57,7 @@ export default function Asistencias() {
                 </tbody>
             </table>
         </div>
+        
     );
 
 }

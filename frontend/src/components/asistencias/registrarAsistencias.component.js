@@ -199,7 +199,8 @@ export default function Asistencias() {
     useEffect(RegistroAlumnos, [alumnos]);
 
     return (
-        <div>
+        
+        <div className=" formulario  col-sm-112 my-14 table-dark">
             <h1>Registro de asistencias</h1>
             <Form onSubmit={handleSubmit(onSubmit)} id="forma-asistencias" ref={refForm}>
                 <Form.Group id="seleccionar-curso">
@@ -230,7 +231,7 @@ export default function Asistencias() {
                 <Calendar value={fechaSeleccionada} onChange={handleChangeFecha} nuevaFechaCsv={nuevaFechaCsv} />
                 <br />
                 <br />
-
+              
                 <h3>Registro</h3>
 
                 <table className="table" id="tablaRegistro">
@@ -255,13 +256,14 @@ export default function Asistencias() {
                 </div>
 
                 <div className="form-group d-flex flex-column justify-content-center">
-                    <input type="submit" value="Registrar asistencia" className="btn btn-dark"></input>
+                    <input type="submit" value="Registrar asistencia" className="btn btn-secondary"></input>
                 </div>
 
                 <p className="error">{mensajeError}</p>
                 <AlertaExito />
             </Form>
         </div>
+        
     )
 
 }

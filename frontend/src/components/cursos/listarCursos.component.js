@@ -65,7 +65,7 @@ export default function Cursos(props) {
     }
 
     return (
-        <div className="mx-auto" >
+        <div table className="table table-dark" >
             <h1>Cursos registrados: </h1>
 
             <table className="table">
