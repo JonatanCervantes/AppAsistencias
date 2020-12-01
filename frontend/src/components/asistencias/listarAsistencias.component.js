@@ -14,7 +14,7 @@ export default function Asistencias() {
 
     const obtenerAsistencias = () => {
         //const idUsuario = usuario._id;
-        axios.get('http://localhost:5000/asistencias/obtenerAsistencias/', { headers: { authorization: usuario.cursos[0] } })
+        axios.get('http://localhost:5000/asistencias/obtenerAsistencias/', { headers: { authorization: usuario.cursos[1] } })
             .then(res => {
                 console.log(res.data);
                 establecerAsistencias(res.data);
@@ -45,19 +45,28 @@ export default function Asistencias() {
                 <tbody>
                     {
                         asistencias.map((asistencia, idx) => {
-                            return (
-                                <tr key={idx}>
-                                    <td>{cursos[0].nombre}</td>
-                                    <td>{asistencia.fecha}</td>
-                                    <td>{asistencia.registro}</td>
-                                </tr>
-                            )
+                            var cursoBuscado = cursos.find(function (asis) { return asis._id == asistencia.idCurso });
+                            if (cursoBuscado) {
+                                return (
+                                    <tr key={idx}>
+                                        <td>{cursoBuscado.nombre}</td>
+                                        <td>{asistencia.fecha}</td>
+                                        {
+                                            asistencia.registro.map((reg, idx) => {
+                                                return (
+                                                    <tr key={idx}>{reg}</tr>
+                                                )
+                                            })
+                                        }
+                                    </tr>
+                                )
+                            }
                         })
                     }
                 </tbody>
             </table>
         </div>
-        
+
     );
 
 }
