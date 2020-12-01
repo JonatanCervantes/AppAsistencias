@@ -5,6 +5,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 
 import { UsuarioProvider } from "./contexts/UsuarioContext";
 import { CursosProvider } from "./contexts/CursosContext";
+import { AsistenciasProvider } from "./contexts/AsistenciasContext";
 
 import Navbar from "./components/navbar.component";
 import Perfil from "./components/perfil/perfil.component";
@@ -19,6 +20,7 @@ import AgregarCurso from './components/cursos/registrarCurso.component';
 import ModificarCurso from './components/cursos/modificarCurso.component';
 import AgregarAlumno from './components/alumnos/registrarAlumno.component';
 import ListarAlumnos from "./components/alumnos/listaAlumnos.component";
+//import { AsistenciasProvider } from './contexts/AsistenciasContext';
 
 
 function App() {
@@ -35,8 +37,10 @@ function App() {
           <Route path="/login" exact component={Login} />
           <PrivateRoute path="/perfil" exact component={Perfil} />
           <PrivateRoute path="/perfil/editar" exact component={ModificarPerfil} />
-          <PrivateRoute path="/asistencias/listar" exact component={ListarAsistencias} />
-          <PrivateRoute path="/asistencias/registrar" exact component={RegistrarAsistencias} />
+          <AsistenciasProvider>
+            <PrivateRoute path="/asistencias/listar" exact component={ListarAsistencias} />
+            <PrivateRoute path="/asistencias/registrar" exact component={RegistrarAsistencias} />
+          </AsistenciasProvider>
           <PrivateRoute path="/cursos/listar" exact component={ListarCursos} />
           <PrivateRoute path="/cursos/registrar" exact component={AgregarCurso} />
           <PrivateRoute path="/alumnos/registrar" exact component={AgregarAlumno} />

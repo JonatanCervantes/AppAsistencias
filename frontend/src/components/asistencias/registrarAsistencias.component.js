@@ -2,6 +2,7 @@ import React, { useState, useContext, useEffect, useRef } from 'react';
 import Form from 'react-bootstrap/Form'
 import { UsuarioContext } from "../../contexts/UsuarioContext";
 import { CursosContext } from "../../contexts/CursosContext";
+import { AsistenciasContext } from "../../contexts/AsistenciasContext";
 
 import Button from 'react-bootstrap/Button';
 
@@ -18,6 +19,7 @@ import "react-datepicker/dist/react-datepicker.css";
 export default function Asistencias() {
     const [usuario, setUsuario] = useContext(UsuarioContext);
     const [cursos, setCursos] = useContext(CursosContext);
+    const [asistencias, obtenerAsistencias] = useContext(AsistenciasContext);
     const [alumnos, setAlumnos] = useState([]);
     const { register, handleSubmit, errors } = useForm();
     const [cursoSeleccionado, setCursoSeleccionado] = useState('');
@@ -37,18 +39,17 @@ export default function Asistencias() {
         return true;
     }
 
-    // const seleccionarCurso = new Promise((resolve, reject) => {
-    //     if (cursos.length > 0) {
-    //         setCursoSeleccionado(cursos[0]._id);
-    //         resolve(true);
-    //     } else {
-    //         resolve(false);
-    //     }
-    // })
-
-    const onSubmit = (data) => {
-        const realizarVerificacion = () => {
-            if (!verificarDatos(cursoSeleccionado, alumnos)) {
+    const onSubmit = async (data) => {
+        var cursoSeleccionadoLocal = '';
+        if (cursoSeleccionado.length == 0) {
+            if (cursos.length > 0) {
+                cursoSeleccionadoLocal = cursos[0]._id;
+            }
+        } else {
+            cursoSeleccionadoLocal = cursoSeleccionado;
+        }
+        const realizarVerificacion = (cur, alus) => {
+            if (!verificarDatos(cur, alus)) {
                 console.log("Datos invalidos");
                 mostrarMensajeError();
                 return false;
@@ -56,28 +57,29 @@ export default function Asistencias() {
             return true;
         }
 
-        if (!realizarVerificacion()) return;
+        if (realizarVerificacion(cursoSeleccionadoLocal, alumnos)) {
+            const registro = prepararArreglo(alumnos);
+            const asistencia = {
+                "idCurso": cursoSeleccionadoLocal,
+                "fecha": fechaSeleccionada,
+                "registro": registro,
+            }
+            console.log(asistencia);
 
-        const registro = prepararArreglo(alumnos);
-        const asistencia = {
-            "idCurso": cursoSeleccionado,
-            "fecha": fechaSeleccionada,
-            "registro": registro,
+            const registrarAsistencia = () => {
+                axios.post('http://localhost:5000/asistencias/add', asistencia)
+                    .then(res => {
+                        setShow(true);
+                        obtenerAsistencias();
+                        console.log(res);
+                    })
+                    .catch(e => {
+                        mostrarMensajeError();
+                        console.log(e);
+                    });
+            }
+            registrarAsistencia();
         }
-        console.log(asistencia);
-
-        const registrarAsistencia = () => {
-            axios.post('http://localhost:5000/asistencias/add', asistencia)
-                .then(res => {
-                    setShow(true);
-                    console.log(res);
-                })
-                .catch(e => {
-                    mostrarMensajeError();
-                    console.log(e);
-                });
-        }
-        registrarAsistencia();
     }
 
     const [show, setShow] = useState(false);
@@ -199,7 +201,7 @@ export default function Asistencias() {
     useEffect(RegistroAlumnos, [alumnos]);
 
     return (
-        
+
         <div className=" formulario  col-sm-112 my-14 table-dark">
             <h1>Registro de asistencias</h1>
             <Form onSubmit={handleSubmit(onSubmit)} id="forma-asistencias" ref={refForm}>
@@ -231,7 +233,7 @@ export default function Asistencias() {
                 <Calendar value={fechaSeleccionada} onChange={handleChangeFecha} nuevaFechaCsv={nuevaFechaCsv} />
                 <br />
                 <br />
-              
+
                 <h3>Registro</h3>
 
                 <table className="table" id="tablaRegistro">
@@ -263,7 +265,7 @@ export default function Asistencias() {
                 <AlertaExito />
             </Form>
         </div>
-        
+
     )
 
 }

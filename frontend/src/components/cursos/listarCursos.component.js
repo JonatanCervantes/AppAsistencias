@@ -10,21 +10,21 @@ import editar from '../../assets/edit.png';
 
 export default function Cursos(props) {
     const [usuario, setUsuario] = useContext(UsuarioContext);
-    const [cursos, setCursos] = useContext(CursosContext);
+    const [cursos, obtenerCursos] = useContext(CursosContext);
 
     const history = useHistory();
 
-    const obtenerCursos = () => {
-        const idUsuario = usuario._id;
-        axios.get('http://localhost:5000/cursos/obtenerCursos/', { headers: { authorization: idUsuario } })
-            .then(res => {
-                console.log(res);
-                establecerCursos(res.data)
-            })
-            .catch(e => {
-                console.log(e);
-            })
-    }
+    // const obtenerCursos = () => {
+    //     const idUsuario = usuario._id;
+    //     axios.get('http://localhost:5000/cursos/obtenerCursos/', { headers: { authorization: idUsuario } })
+    //         .then(res => {
+    //             console.log(res);
+    //             establecerCursos(res.data)
+    //         })
+    //         .catch(e => {
+    //             console.log(e);
+    //         })
+    // }
 
     const eliminarCurso = (idCurso) => {
         console.log('eliminar');
@@ -37,6 +37,7 @@ export default function Cursos(props) {
             .then(res => {
                 console.log(res);
                 obtenerCursos();
+                //obtenerCursos();
             })
             .catch(e => {
                 console.log(e);
@@ -60,9 +61,9 @@ export default function Cursos(props) {
         console.log('Ver curso');
     }
 
-    function establecerCursos(cursos) {
-        setCursos(cursos);
-    }
+    // function establecerCursos(cursos) {
+    //     setCursos(cursos);
+    // }
 
     return (
         <div table className="table table-dark" >

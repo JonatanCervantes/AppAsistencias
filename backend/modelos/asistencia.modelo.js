@@ -1,5 +1,7 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
+const moment = require('moment-timezone');
+const dateObregon = moment.tz(Date.now(), "America/Los_Angeles");
 
 const asistenciaSchema = new Schema({
     fecha: {

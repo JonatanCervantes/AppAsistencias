@@ -29,7 +29,7 @@ export const CursosProvider = (props) => {
     useEffect(obtenerCursos, [usuario]);
 
     return (
-        <CursosContext.Provider value={[cursos, setCursos]}>
+        <CursosContext.Provider value={[cursos, obtenerCursos]}>
             {props.children}
         </CursosContext.Provider>
     );

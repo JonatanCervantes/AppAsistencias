@@ -1,35 +1,30 @@
 import React, { useContext, useState, useEffect } from 'react';
 import { UsuarioContext } from "../../contexts/UsuarioContext";
 import { CursosContext } from "../../contexts/CursosContext";
+import { AsistenciasContext } from "../../contexts/AsistenciasContext";
 import axios from 'axios';
 import { useHistory } from 'react-router-dom';
+import { useFieldArray } from 'react-hook-form';
+var moment = require('moment-timezone');
+//moment.tz.setDefault("America/New_York");
+// moment().tz("America/Los_Angeles").format();
 
 export default function Asistencias() {
     const [usuario, setUsuario] = useContext(UsuarioContext);
     const [cursos, setCursos] = useContext(CursosContext);
-    const [asistencias, setAsistencias] = useState([{}]);
+    const [asistencias, obtenerAsistencias] = useContext(AsistenciasContext);
 
     const history = useHistory();
 
-
-    const obtenerAsistencias = () => {
-        //const idUsuario = usuario._id;
-        axios.get('http://localhost:5000/asistencias/obtenerAsistencias/', { headers: { authorization: usuario.cursos[1] } })
-            .then(res => {
-                console.log(res.data);
-                establecerAsistencias(res.data);
-            })
-            .catch(e => {
-                console.log(e);
-            })
+    function encontrarCurso(idCurso) {
+        const curso = cursos.find(curso => curso._id == idCurso);
+        return curso.nombre;
     }
 
-    function establecerAsistencias(asistencias) {
-        setAsistencias(asistencias);
+    function transformarFecha(fecha) {
+        var fechaActualizada = moment.tz(fecha, "America/Hermosillo").format();
+        return fechaActualizada;
     }
-
-    //HACER CONTEXT DE CURSOS
-    useEffect(obtenerAsistencias, []);
 
     return (
         <div className="mx-auto table-dark" >
@@ -45,22 +40,20 @@ export default function Asistencias() {
                 <tbody>
                     {
                         asistencias.map((asistencia, idx) => {
-                            var cursoBuscado = cursos.find(function (asis) { return asis._id == asistencia.idCurso });
-                            if (cursoBuscado) {
-                                return (
-                                    <tr key={idx}>
-                                        <td>{cursoBuscado.nombre}</td>
-                                        <td>{asistencia.fecha}</td>
-                                        {
-                                            asistencia.registro.map((reg, idx) => {
-                                                return (
-                                                    <tr key={idx}>{reg}</tr>
-                                                )
-                                            })
-                                        }
-                                    </tr>
-                                )
-                            }
+                            return (
+                                <tr key={idx}>
+                                    <td>{encontrarCurso(asistencia.idCurso)}</td>
+                                    <td>{transformarFecha(asistencia.fecha)}</td>
+                                    {/* <td>{asistencia.fecha}</td> */}
+                                    {
+                                        asistencia.registro.map((reg, idx) => {
+                                            return (
+                                                <tr key={idx}>{reg}</tr>
+                                            )
+                                        })
+                                    }
+                                </tr>
+                            )
                         })
                     }
                 </tbody>

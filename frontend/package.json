@@ -10,6 +10,7 @@
     "axios": "^0.21.0",
     "bootstrap": "^4.5.3",
     "csv": "^5.3.2",
+    "moment-timezone": "^0.5.32",
     "prop-types": "^15.7.2",
     "react": "^17.0.1",
     "react-bootstrap": "^1.4.0",
