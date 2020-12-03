@@ -5,7 +5,6 @@ const Schema = mongoose.Schema;
 const alumnoSchema = new Schema({
     nombre: {
         type: String,
-        minlength: 6,
         required: [true, 'El nombre es necesario'],
 
     },

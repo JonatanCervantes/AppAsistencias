@@ -31,6 +31,8 @@ const cursoSchema = new Schema({
         required:[true, 'El Numero de unidades es necesario'],
     },
     
+    alumnos:[],
+
     //grupo: [{
        // text: String,
         //type: mongoose.Schema.Types.ObjectId,
