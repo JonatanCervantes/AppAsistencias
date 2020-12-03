@@ -28,8 +28,8 @@ export default function Perfil() {
         });
     }
     return (
-        <div className="wrap">
-            <div className="container profile col-sm-12 my-14 table table-dark">
+        <div className="container formulario wrap " >
+            <div className="container profile table table-dark">
                 <h1>Perfil</h1>
 
                 <div className="element">
@@ -71,7 +71,7 @@ export default function Perfil() {
                 <br />
 
                 <div className="form-group">
-                    <input type="submit" onClick={() => modificarUsuario()} value="Editar" className="btn btn-dark"></input>
+                    <input type="submit" onClick={() => modificarUsuario()} value="Editar" className="btn btn-secondary"></input>
                 </div>
             </div>
 

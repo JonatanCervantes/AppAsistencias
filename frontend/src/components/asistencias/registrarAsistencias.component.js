@@ -202,7 +202,7 @@ export default function Asistencias() {
 
     return (
 
-        <div className=" formulario  col-sm-112 my-14 table-dark">
+        <div className=" container formulario table-dark">
             <h1>Registro de asistencias</h1>
             <Form onSubmit={handleSubmit(onSubmit)} id="forma-asistencias" ref={refForm}>
                 <Form.Group id="seleccionar-curso">

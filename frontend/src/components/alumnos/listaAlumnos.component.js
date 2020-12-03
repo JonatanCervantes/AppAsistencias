@@ -67,7 +67,7 @@ export default function Alumnos() {
     useEffect(obtenerAlumnos, []);
 
     return (
-        <div className="mx-auto table-dark" >
+        <div className="mx-auto table-dark container table" >
             <h1>Alumnos registrados: </h1>
 
             <table className="table">

@@ -87,7 +87,7 @@ export default function Alumnos () {
                         {errors.email && <p className="error">{errors.email.message}</p>}
                     </div>
                     <div className="form-group d-flex flex-column justify-content-center s-alumno">
-                        <input type="submit" value="Registrar alumno" className="btn btn-dark"></input>
+                        <input type="submit" value="Registrar alumno" className="btn btn-secondary"></input>
                     </div>
                 </form>
                 <p className="error">{mensajeError}</p>

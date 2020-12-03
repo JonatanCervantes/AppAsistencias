@@ -54,7 +54,7 @@ export default function Perfil() {
 
     return (
         <div className="wrap">
-            <div className="container formulario">
+            <div className="container formulario ">
                 <h1>Perfil</h1>
                 <form onSubmit={handleSubmit(onSubmit)}>
                     <div className="form-group d-flex flex-column justify-content-center">                        
@@ -117,7 +117,7 @@ export default function Perfil() {
                         {errors.telefono && <p className="error">{errors.telefono.message}</p>}
                     </div>
                     <div className="form-group">
-                        <input type="submit" value="Guardar" className="btn btn-dark"></input>
+                        <input type="submit" value="Guardar" className="btn-secondary"></input>
                     </div>
                 </form>
                 <AlertaExito/>

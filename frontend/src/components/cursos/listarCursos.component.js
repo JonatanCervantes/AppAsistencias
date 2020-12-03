@@ -66,7 +66,7 @@ export default function Cursos(props) {
     // }
 
     return (
-        <div table className="table table-dark" >
+        <div table className=" container formulario table table-dark" >
             <h1>Cursos registrados: </h1>
 
             <table className="table">

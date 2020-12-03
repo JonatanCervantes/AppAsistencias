@@ -18,7 +18,12 @@ export default function Asistencias() {
 
     function encontrarCurso(idCurso) {
         const curso = cursos.find(curso => curso._id == idCurso);
-        return curso.nombre;
+        if (curso == undefined) {
+            return '';
+          } else {
+            return curso.nombre;
+            }
+        /*return curso.nombre;*/
     }
 
     function transformarFecha(fecha) {
@@ -27,7 +32,7 @@ export default function Asistencias() {
     }
 
     return (
-        <div className="mx-auto table-dark" >
+        <div className="mx-auto table-dark container table" >
             <h1>Asistencias: </h1>
             <table className="table">
                 <thead className="thead-dark">
