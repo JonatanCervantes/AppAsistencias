@@ -35,37 +35,31 @@ export default function Perfil() {
                 <div className="element">
                     <div className="label">Nombre:</div>
                     <div className="data" id="nombre">{usuario.nombre}</div>
-                    <div className="button" id="btnNombre"><img src={edit} alt="Edit" /></div>
                 </div>
 
                 <div className="element">
                     <div className="label">ID:</div>
                     <div className="data" id="id">{usuario.id}</div>
-                    <div className="button" id="btnID"><img src={edit} alt="Edit" /></div>
                 </div>
 
                 <div className="element">
                     <div className="label">Institución:</div>
                     <div className="data" id="institucion">{usuario.nomInstitucion}</div>
-                    <div className="button" id="btnInstitucion"><img src={edit} alt="Edit" /></div>
                 </div>
 
                 <div className="element">
                     <div className="label">Departamento:</div>
                     <div className="data" id="departamento">{usuario.nomDepartamento}</div>
-                    <div className="button" id="btnDepartamento"><img src={edit} alt="Edit" /></div>
                 </div>
 
                 <div className="element">
                     <div className="label">Cubículo:</div>
                     <div className="data" id="cubiculo">{usuario.numCubiculo}</div>
-                    <div className="button" id="btnCubiculo"><img src={edit} alt="Edit" /></div>
                 </div>
 
                 <div className="element">
                     <div className="label">Teléfono:</div>
                     <div className="data" id="telefono">{usuario.telefono}</div>
-                    <div className="button" id="btnTelefono"><img src={edit} alt="Edit" /></div>
                 </div>
 
                 <br />

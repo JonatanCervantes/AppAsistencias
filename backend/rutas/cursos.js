@@ -25,6 +25,25 @@ router.route('/obtenerCursos').get((req, res) => {
     }
 });
 
+router.route('/agregaAlumnos').put((req, res)=>{
+    const curso = req.body.curso;
+    const alumnos = req.body.alumnos;    
+    alumnosArray = JSON.parse(alumnos);
+
+    try {
+        Curso.findByIdAndUpdate(curso, {alumnos:alumnosArray}, {useFindAndModify:false, new:true}, (err, result)=>{
+            if(err) {
+                console.log(err);
+                res.json(err);
+            } else {
+                res.json(result);
+            }
+        })
+    } catch (err) {
+        console.log('Error'+err);
+    }
+});
+
 router.route('/add').post((req, res) => {
     const semestre = req.body.semestre;
     const nombre = req.body.nombre;
