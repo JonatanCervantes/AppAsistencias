@@ -1,9 +1,10 @@
 const parse = require('csv-parse');
 const assert = require('assert');
-const output = [];
 
 export const cargarCsv = (csv) => {
     return new Promise((resolve, reject) => {
+        const output = [];
+
         const parser = parse({
             delimiter: ["\t"],
             relax_column_count: true
@@ -22,6 +23,8 @@ export const cargarCsv = (csv) => {
         });
 
         parser.on('end', function () {
+            console.log('csvParser');
+            console.log(output);
             resolve(output);
         });
 

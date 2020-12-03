@@ -113,9 +113,53 @@ export default function Asistencias() {
     }
 
     const establecerAlumnosArreglo = (arregloAlumnosImportados) => {
-        var copia = alumnos;
-        copia = copia.concat(arregloAlumnosImportados);
-        setAlumnos(copia);
+        const copiaAlumnos = [...alumnos];
+        const copiaAlumnosNombre = [];
+
+        copiaAlumnos.forEach(alumno => {
+            copiaAlumnosNombre.push(alumno.nombre);
+        });
+
+        arregloAlumnosImportados.forEach(alumnoImportado => {
+            if (!copiaAlumnosNombre.includes(alumnoImportado.nombre)) {
+                copiaAlumnos.push(alumnoImportado);
+            } else {
+                copiaAlumnos.forEach(element => {
+                    if (element.nombre == alumnoImportado.nombre) {
+                        element.asistencia = alumnoImportado.asistencia;
+                    }
+                });
+            }
+        });
+        console.log(copiaAlumnos);
+
+        setAlumnos(copiaAlumnos);
+    }
+
+    const formatearAlumnos = (arregloAlumnos) => {
+        const arregloAlumnosFormateados = [];
+        arregloAlumnos.forEach(element => {
+            arregloAlumnosFormateados.push({ nombre: element.nombre, asistencia: false })
+        });
+        return arregloAlumnosFormateados;
+    }
+
+    const establecerAlumnosCursos = () => {
+        if (cursoSeleccionado != '') {
+            const idCursoSeleccionado = cursoSeleccionado;
+            const cursoEncontrado = cursos.find(curso => curso._id == idCursoSeleccionado);
+            const arregloAlumnosFormateados = formatearAlumnos(cursoEncontrado.alumnos);
+            const clonAlumnos = [...arregloAlumnosFormateados];
+            setAlumnos(clonAlumnos);
+        } else {
+            if (cursos.length > 0) {
+                const cursoEncontrado = cursos[0];
+                const arregloAlumnosFormateados = formatearAlumnos(cursoEncontrado.alumnos);
+                const clonAlumnos = [...arregloAlumnosFormateados];
+                setAlumnos(clonAlumnos);
+            }
+
+        }
     }
 
     const handleBlur = (tags, tipo) => (event) => {
@@ -160,6 +204,7 @@ export default function Asistencias() {
                     console.log(err);
                 });
         };
+
         reader.readAsText(e.target.files[0]);
     }
 
@@ -198,6 +243,7 @@ export default function Asistencias() {
         );
     }
 
+    useEffect(establecerAlumnosCursos, [cursoSeleccionado]);
     useEffect(RegistroAlumnos, [alumnos]);
 
     return (
@@ -207,11 +253,16 @@ export default function Asistencias() {
             <Form onSubmit={handleSubmit(onSubmit)} id="forma-asistencias" ref={refForm}>
                 <Form.Group id="seleccionar-curso">
                     <Form.Label>Curso</Form.Label>
-                    <select value={cursoSeleccionado} onChange={handleChange} >
+                    <Form.Control as="select" value={cursoSeleccionado} onChange={handleChange}>
                         {cursos.map((curso, idx) => (
                             <option key={curso._id} value={curso._id}>{curso.nombre}</option>
                         ))}
-                    </select>
+                    </Form.Control>
+                    {/* <select value={cursoSeleccionado} onChange={handleChange} >
+                        {cursos.map((curso, idx) => (
+                            <option key={curso._id} value={curso._id}>{curso.nombre}</option>
+                        ))}
+                    </select> */}
                 </Form.Group>
 
                 <Form.Group id="seleccionar-grupo">

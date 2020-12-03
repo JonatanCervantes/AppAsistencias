@@ -9,9 +9,9 @@ export default function Alumnos() {
     const [usuario, setUsuario] = useContext(UsuarioContext);
     const { register, handleSubmit, errors } = useForm();
     const [mensajeError, setMensajeError] = useState("");
-    const [alumnos, setAlumnos] = useState([{nombre:"", email:""}]);
+    const [alumnos, setAlumnos] = useState([{ nombre: "", email: "" }]);
     const [cursoSeleccionado, setCursoSeleccionado] = useState('');
-    const [cursos, setCursos] = useContext(CursosContext);
+    const [cursos, obtenerCursos] = useContext(CursosContext);
 
     const mostrarMensajeError = () => {
         setMensajeError("Error al agregar alumno");
@@ -44,47 +44,14 @@ export default function Alumnos() {
 
         if (realizarVerificacion(cursoSeleccionadoLocal, alumnos)) {
             console.log(alumnos);
-        
-            alumnos.map(reg => {
-                const alumno = {
-                    "nombre": reg.nombre,
-                    "email": reg.email,
-                }
-
-                const registarAlumno = () => {
-                    axios.post('http://localhost:5000/alumnos/add', alumno)
-                        .then(res => {
-                            console.log(res);
-                            asignarAlumnoAUsuario(usuario._id, res);
-                        })
-                        .catch(e => {
-                            console.log(e);
-                            console.log("Error en registrar alumno");
-                            mostrarMensajeError();
-                        });
-                }
-                registarAlumno();
-            });
-        }
-
-        const asignarAlumnoAUsuario = async (idUsuario, res) => {
-            axios.post('http://localhost:5000/usuarios/relAlumno', { "usuario": idUsuario, "alumno": res })
-                .then(res => {
-                    console.log(res);
-                    setShow(true);
-                })
-                .catch(e => {
-                    console.log(e);
-                    console.log("Error en asignar alumno a usuario");
-                    mostrarMensajeError();
-                });
         }
 
         const registarAlumnoEnCurso = async (idCurso, arregloAlumnos) => {
             axios.put('http://localhost:5000/cursos/agregaAlumnos', { "curso": idCurso, "alumnos": JSON.stringify(arregloAlumnos) })
                 .then(res => {
                     console.log(res);
-                    //setShow(true);
+                    obtenerCursos();
+                    setShow(true);
                 })
                 .catch(e => {
                     console.log(e);
@@ -196,7 +163,7 @@ export default function Alumnos() {
                     <RegistroAlumnos />
 
                     <div className="form-group d-flex flex-column justify-content-center s-alumno">
-                        <input type="submit" value="Registrar alumno" className="btn btn-secondary"></input>
+                        {/* <input type="submit" value="Registrar alumno" className="btn btn-secondary"></input> */}
                         <button type="button" onClick={agregarAlumno} className="btn btn-light">Añadir alumno</button>
                     </div>
 

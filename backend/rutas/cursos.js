@@ -25,22 +25,28 @@ router.route('/obtenerCursos').get((req, res) => {
     }
 });
 
-router.route('/agregaAlumnos').put((req, res)=>{
+router.route('/agregaAlumnos').put((req, res) => {
     const curso = req.body.curso;
-    const alumnos = req.body.alumnos;    
-    alumnosArray = JSON.parse(alumnos);
+    const registroAlumnos = req.body.alumnos;
+    alumnosArray = JSON.parse(registroAlumnos);
 
     try {
-        Curso.findByIdAndUpdate(curso, {alumnos:alumnosArray}, {useFindAndModify:false, new:true}, (err, result)=>{
-            if(err) {
-                console.log(err);
-                res.json(err);
-            } else {
-                res.json(result);
-            }
+        Curso.findById(curso).then(doc => {
+            alumnosArray.forEach(alumno => {
+                doc.alumnos.push(alumno);
+            });
+            doc.save().then(cursoModificado => res.json(cursoModificado)
+            ).catch(error => {
+                res.status(400).json('Error' + error);
+                console.log(error);
+            })
         })
+            .catch(error => {
+                res.status(400).json('Error' + error);
+                console.log(error);
+            });
     } catch (err) {
-        console.log('Error'+err);
+        console.log('Error' + err);
     }
 });
 

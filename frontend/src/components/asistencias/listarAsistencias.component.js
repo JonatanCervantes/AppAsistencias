@@ -6,8 +6,6 @@ import axios from 'axios';
 import { useHistory } from 'react-router-dom';
 import { useFieldArray } from 'react-hook-form';
 var moment = require('moment-timezone');
-//moment.tz.setDefault("America/New_York");
-// moment().tz("America/Los_Angeles").format();
 
 export default function Asistencias() {
     const [usuario, setUsuario] = useContext(UsuarioContext);
@@ -20,15 +18,20 @@ export default function Asistencias() {
         const curso = cursos.find(curso => curso._id == idCurso);
         if (curso == undefined) {
             return '';
-          } else {
+        } else {
             return curso.nombre;
-            }
+        }
         /*return curso.nombre;*/
     }
 
     function transformarFecha(fecha) {
         var fechaActualizada = moment.tz(fecha, "America/Hermosillo").format();
         return fechaActualizada;
+    }
+
+    function transformarBoolean(asistencia) {
+        if (asistencia) return 'ASISTIO';
+        return 'FALTO';
     }
 
     return (
@@ -49,11 +52,14 @@ export default function Asistencias() {
                                 <tr key={idx}>
                                     <td>{encontrarCurso(asistencia.idCurso)}</td>
                                     <td>{transformarFecha(asistencia.fecha)}</td>
-                                    {/* <td>{asistencia.fecha}</td> */}
                                     {
+
                                         asistencia.registro.map((reg, idx) => {
                                             return (
-                                                <tr key={idx}>{reg}</tr>
+                                                <tr key={idx}>
+                                                    <td>{reg[0]}</td>
+                                                    <td>{transformarBoolean(reg[1])}</td>
+                                                </tr>
                                             )
                                         })
                                     }
