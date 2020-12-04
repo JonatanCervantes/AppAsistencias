@@ -11,10 +11,55 @@ export default function Alumnos() {
     const [mensajeError, setMensajeError] = useState("");
     const [alumnos, setAlumnos] = useState([{ nombre: "", email: "" }]);
     const [cursoSeleccionado, setCursoSeleccionado] = useState('');
+    //const [idCursoSeleccionado, idCursoSeleccionado] = useState(0);
     const [cursos, obtenerCursos] = useContext(CursosContext);
 
     const mostrarMensajeError = () => {
         setMensajeError("Error al agregar alumno");
+    }
+
+    const prepararAlumnosFiltrados = (datos) => {
+        var cursoSeleccionadoLocal = '';
+        if (cursoSeleccionado.length == 0) {
+            if (cursos.length > 0) {
+                cursoSeleccionadoLocal = cursos[0]._id;
+            }
+        } else {
+            cursoSeleccionadoLocal = cursoSeleccionado;
+        }
+        var registro = [];
+        if (cursos != undefined && cursos.length > 0) {
+            const cursoLocalSeleccionado = cursos.find((curso) => curso._id == cursoSeleccionadoLocal);
+            const alumnosRegistrados = cursoLocalSeleccionado.alumnos;
+            const nombresAlumnosRegistrados = [];
+            alumnosRegistrados.forEach(element => {
+                nombresAlumnosRegistrados.push(element.nombre);
+            });
+            datos.forEach(element => {
+                if (!nombresAlumnosRegistrados.includes(element.nombre)) {
+                    registro.push({ nombre: element.nombre, email: element.email });
+                }
+            });
+        }
+        return registro;
+    }
+
+    const establecerAlumnosCursos = () => {
+        if (cursoSeleccionado != '') {
+            const idCursoSeleccionado = cursoSeleccionado;
+            const cursoEncontrado = cursos.find(curso => curso._id == idCursoSeleccionado);
+            const arregloAlumnosFormateados = (cursoEncontrado.alumnos);
+            const clonAlumnos = [...arregloAlumnosFormateados];
+            setAlumnos(clonAlumnos);
+        } else {
+            if (cursos.length > 0) {
+                const cursoEncontrado = cursos[0];
+                const arregloAlumnosFormateados = (cursoEncontrado.alumnos);
+                const clonAlumnos = [...arregloAlumnosFormateados];
+                setAlumnos(clonAlumnos);
+            }
+
+        }
     }
 
     const verificarDatos = (cur, alu) => {
@@ -60,7 +105,7 @@ export default function Alumnos() {
                 });
         }
 
-        registarAlumnoEnCurso(cursoSeleccionadoLocal, alumnos);
+        registarAlumnoEnCurso(cursoSeleccionadoLocal, prepararAlumnosFiltrados(alumnos));
 
         console.log(alumnos);
 
@@ -146,6 +191,7 @@ export default function Alumnos() {
     }
 
     useEffect(RegistroAlumnos, [alumnos]);
+    useEffect(establecerAlumnosCursos, [cursoSeleccionado]);
 
     return (
         <div className="wrap">

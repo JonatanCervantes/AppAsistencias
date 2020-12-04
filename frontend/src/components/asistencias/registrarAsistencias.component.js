@@ -18,7 +18,7 @@ import "react-datepicker/dist/react-datepicker.css";
 
 export default function Asistencias() {
     const [usuario, setUsuario] = useContext(UsuarioContext);
-    const [cursos, setCursos] = useContext(CursosContext);
+    const [cursos, obtenerCursos] = useContext(CursosContext);
     const [asistencias, obtenerAsistencias] = useContext(AsistenciasContext);
     const [alumnos, setAlumnos] = useState([]);
     const { register, handleSubmit, errors } = useForm();
@@ -30,6 +30,24 @@ export default function Asistencias() {
     const prepararArreglo = (datos) => {
         var registro = [];
         datos.map(alumno => registro.push([alumno.nombre, alumno.asistencia]));
+        return registro;
+    }
+
+    const prepararArregloCorreos = (datos) => {
+        var registro = [];
+        if (cursos != undefined && cursos.length > 0) {
+            const cursoLocalSeleccionado = cursos.find((curso) => curso._id == cursoSeleccionado);
+            const alumnosRegistrados = cursoLocalSeleccionado.alumnos;
+            const nombresAlumnosRegistrados = [];
+            alumnosRegistrados.forEach(element => {
+                nombresAlumnosRegistrados.push(element.nombre);
+            });
+            datos.forEach(element => {
+                if (!nombresAlumnosRegistrados.includes(element.nombre)) {
+                    registro.push({ nombre: element.nombre, email: 'correodefault@gmail.com' });
+                }
+            });
+        }
         return registro;
     }
 
@@ -66,11 +84,26 @@ export default function Asistencias() {
             }
             console.log(asistencia);
 
+            const regisrtarAlumnoEnCurso = async (idCurso, arregloAlumnos) => {
+                axios.put('http://localhost:5000/cursos/agregaAlumnos', { "curso": idCurso, "alumnos": JSON.stringify(arregloAlumnos) })
+                    .then(res => {
+                        console.log(res);
+                        obtenerCursos();
+                    })
+                    .catch(e => {
+                        console.log(e);
+                        console.log("Error en registrar alumno en curso");
+                        mostrarMensajeError();
+                    });
+            }
+
             const registrarAsistencia = () => {
                 axios.post('http://localhost:5000/asistencias/add', asistencia)
                     .then(res => {
                         setShow(true);
                         obtenerAsistencias();
+                        const registroAlumnosCorreo = prepararArregloCorreos(alumnos);
+                        regisrtarAlumnoEnCurso(cursoSeleccionadoLocal, registroAlumnosCorreo);
                         console.log(res);
                     })
                     .catch(e => {
@@ -131,7 +164,6 @@ export default function Asistencias() {
                 });
             }
         });
-        console.log(copiaAlumnos);
 
         setAlumnos(copiaAlumnos);
     }
