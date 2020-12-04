@@ -126,8 +126,9 @@ export default function Alumnos() {
                             id={`nombre-${idx}`}
                             defaultValue={alumno.nombre}
                             name="nombre"
-                            ref={register({ required: "*Nombre requerido", minLength: { value: 1, message: "Mínimo 1 caracteres." } })}
+                            ref={register({ required: "*Nombre requerido", minLength: { value: 3, message: "Mínimo 3 caracteres." },maxLength: { value: 25, message: "Máximo 25 caracteres." } })}
                         ></input>
+                          <br/>
                         {errors.nombre && <p className="error">{errors.nombre.message}</p>}
                         <input
                             type="text"
@@ -139,6 +140,7 @@ export default function Alumnos() {
                             name="email"
                             ref={register({ required: "*Correo requerido", pattern: { value: /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/, message: "Correo invalido" } })}
                         ></input>
+                        <br/>
                         {errors.email && <p className="error">{errors.email.message}</p>}
                     </div>
                 )}</div>
