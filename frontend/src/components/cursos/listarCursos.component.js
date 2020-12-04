@@ -72,7 +72,7 @@ export default function Cursos(props) {
                                     <td>{curso.clave}</td>
                                     <td>{curso.unidades}</td>
                                     <td className="button" id="btnDelete"><img src={eliminar} width="25px" alt="Eliminar" onClick={() => eliminarCurso(curso._id)} /></td>
-                                    <td className="button" id="btnLookup"><button><img src={ver} width="25px" alt="Ver" onClick={() => verCurso()} /></button></td>
+                                    <td className="button" id="btnLookup"><img src={ver} width="25px" alt="Ver" onClick={() => verCurso()} /></td>
                                     <td className="button" id="btnEdit"><img src={editar} width="25px" alt="Editar" onClick={() => modificarCurso(curso._id, curso.semestre, curso.nombre, curso.clave, curso.unidades)} /></td>
                                 </tr>
                             )
